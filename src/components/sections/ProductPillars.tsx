@@ -61,13 +61,13 @@ export default function ProductPillars() {
                 key={pillar.id}
                 onMouseEnter={() => setActive(i)}
                 className={`relative cursor-pointer overflow-hidden rounded-[2rem] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-                    isActive ? "flex-[3] bg-black" : "flex-[1] bg-[#F4F2F8]"
+                    isActive ? "flex-[3] bg-[#ede7f8]" : "flex-[1] bg-[#F4F2F8]"
                 }`}
               >
                 {/* Label — always visible top-left */}
 <div
   className={`absolute left-6 top-6 z-20 text-sm font-medium transition-colors duration-300 ${
-    isActive ? "text-white/80" : "text-brand-purple-dark/70"
+    isActive ? "text-black" : "text-brand-purple-dark/70"
   }`}
 >
   {pillar.label}
@@ -76,7 +76,7 @@ export default function ProductPillars() {
 {/* Number — always visible top-right */}
 <div
   className={`absolute right-6 top-6 z-20 text-2xl font-bold transition-colors duration-300 ${
-    isActive ? "text-white/30" : "text-brand-purple-dark/20"
+    isActive ? "text-black" : "text-brand-purple-dark/20"
   }`}
 >
   .{pillar.id}
@@ -86,7 +86,7 @@ export default function ProductPillars() {
 <div className="absolute bottom-8 left-6 right-6 z-20">
   <h3
     className={`text-xl font-bold leading-snug transition-colors duration-300 md:text-2xl lg:text-3xl ${
-      isActive ? "text-white" : "text-brand-purple-dark"
+      isActive ? "text-black" : "text-brand-purple-dark/50"
     }`}
   >
     {pillar.headline}
@@ -94,7 +94,7 @@ export default function ProductPillars() {
 
   <p
     className={`mt-2 max-w-md text-sm transition-opacity duration-300 md:text-base ${
-      isActive ? "text-white/80 opacity-100 delay-300" : "pointer-events-none h-0 opacity-0"
+      isActive ? "text-black opacity-100 delay-300" : "pointer-events-none h-0 opacity-0"
     }`}
   >
     {pillar.body}
