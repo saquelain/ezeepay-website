@@ -1,0 +1,118 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { ChevronDown, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { NAV_LINKS } from "@/lib/constants/navigation";
+import FlippyButton from "../ui/FlippyButton";
+import ServicesMegaMenu from "@/components/layout/ServicesMegaMenu";
+import ResourcesMegaMenu from "@/components/layout/ResourcesMegaMenu";
+import MobileMenu from "@/components/layout/MobileMenu";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
+import { useClickSound } from "@/hooks/useClickSound";
+
+export default function Navbar() {
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const hidden = useScrollDirection();
+  const playClick = useClickSound();
+
+  if (hidden && openMenu) setOpenMenu(null);
+
+  return (
+    <>
+      <header
+        onMouseLeave={() => setOpenMenu(null)}
+        className={`fixed top-0 inset-x-0 z-50 bg-[#EDE7F8] shadow-[0_1px_12px_rgba(59,30,102,0.08)]
+                    transition-transform duration-300 ease-in-out
+                    ${hidden && !mobileOpen ? "-translate-y-full" : "translate-y-0"}`}
+      >
+        <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
+          {/* Logo */}
+          <Link href="/" aria-label="Ezeepay home">
+            <Image
+              src="/ezeepay-logo.png"
+              alt="Ezeepay — A brand of MJ Digital"
+              width={180}
+              height={44}
+              priority
+            />
+          </Link>
+
+          {/* Links (desktop) */}
+          <ul className="hidden items-center gap-8 lg:flex">
+            {NAV_LINKS.map((link) => (
+              <li
+                key={link.label}
+                onMouseEnter={() => setOpenMenu(link.hasMegaMenu ? link.label : null)}
+              >
+                <Link
+                  href={link.href}
+                  className={`flex items-center gap-1 py-7 font-medium transition-colors
+                              hover:text-brand-purple ${
+                                openMenu === link.label
+                                  ? "text-brand-purple"
+                                  : "text-brand-purple-dark"
+                              }`}
+                >
+                  {link.label}
+                  {link.hasMegaMenu && (
+                    <ChevronDown
+                      size={16}
+                      className={`transition-transform duration-200 ${
+                        openMenu === link.label ? "rotate-180" : ""
+                      }`}
+                    />
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          {/* Buttons (desktop) */}
+          <div className="hidden items-center gap-3 lg:flex">
+            <FlippyButton
+              href="https://login.ezeepay.app"
+              label="Partner Login"
+              onClick={playClick}
+            />
+            <Link
+  href="/download"
+  onClick={playClick}
+  className="inline-flex items-center justify-center whitespace-nowrap
+             rounded-full bg-gradient-to-b from-[#FF9142] to-brand-orange px-5 py-[17px]
+             text-[16px] font-medium leading-none text-white
+             shadow-lg shadow-brand-orange/30
+             transition-all duration-300 ease-out
+             hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl hover:shadow-brand-orange/40
+             active:translate-y-0 active:scale-100"
+>
+  Download App
+</Link>
+          </div>
+
+          {/* Hamburger (mobile) */}
+          <button
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            className="text-brand-purple-dark lg:hidden"
+          >
+            {mobileOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </nav>
+
+        {/* Mega menus (desktop) */}
+        {openMenu === "Services" && <ServicesMegaMenu />}
+        {openMenu === "Resources" && <ResourcesMegaMenu />}
+      </header>
+
+      {/* Mobile menu — sibling of header so position:fixed works correctly */}
+      <MobileMenu
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        onButtonClick={playClick}
+      />
+    </>
+  );
+}

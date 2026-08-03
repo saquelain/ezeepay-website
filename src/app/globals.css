@@ -5,6 +5,18 @@
   --foreground: #171717;
 }
 
+@theme {
+  /* Primary brand — purple (from the new creatives) */
+  --color-brand-purple: #5B2D8E;        /* main purple — buttons, links, highlights */
+  --color-brand-purple-dark: #3B1E66;   /* deep purple — headings, navbar text */
+  --color-brand-purple-light: #F3EEFA;  /* soft tint — hover states, section backgrounds */
+
+  /* Accent — orange from the logo, used sparingly (primary CTA only) */
+  --color-brand-orange: #F47B20;
+
+  --color-brand-grey: #6B7280;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -22,5 +34,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
