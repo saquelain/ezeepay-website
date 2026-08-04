@@ -6,66 +6,114 @@ import { Star, ShieldCheck, Zap } from "lucide-react";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import RangoliMandala from "@/components/svg/RangoliMandala";
+import RangoliLotus from "@/components/svg/RangoliLotus";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
 
-    const sectionRef = useRef<HTMLElement>(null);
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      /* ── Initial states ── */
+      gsap.set(".hero-rangoli-left", {
+        xPercent: -14,
+        yPercent: 22,
+        rotate: 12,
+        opacity: 0.9,
+      });
+      gsap.set(".hero-rangoli-right", {
+        xPercent: 14,
+        yPercent: 22,
+        rotate: -12,
+        opacity: 0.9,
+      });
+      gsap.set(".hero-ground-new", { yPercent: 100 });
 
-useLayoutEffect(() => {
-  const ctx = gsap.context(() => {
-    // Initial states (the offsets we removed from Tailwind)
-    gsap.set(".hero-grass-left", { xPercent: -6, yPercent: 12 });
-    gsap.set(".hero-grass-right", { xPercent: 6, yPercent: 12, scaleX: -1 });
-    gsap.set(".hero-ground-new", { yPercent: 100 });
+      /* ── Rangoli draw-on-load (from zero) ── */
+      const rangoliPaths = gsap.utils.toArray<SVGPathElement>(
+        ".hero-rangoli-left .draw-path, .hero-rangoli-right .draw-path"
+      );
 
-    const tl = gsap.timeline({
+      rangoliPaths.forEach((p) => {
+        const len = p.getTotalLength();
+        gsap.set(p, { strokeDasharray: len, strokeDashoffset: len });
+      });
+
+      // Strokes are now hidden — safe to reveal the SVGs (they ship invisible
+      // in the markup so the server-rendered frame never shows them complete)
+      gsap.set(".hero-rangoli-left, .hero-rangoli-right", {
+        visibility: "visible",
+      });
+
+      gsap.to(rangoliPaths, {
+        strokeDashoffset: 0,
+        duration: 2.2,
+        ease: "power2.out",
+        stagger: 0.04,
+        delay: 0.2,
+      });
+
+      /* ── Scroll timeline (pinned + scrubbed) ── */
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
           end: "+=150%",
           scrub: 1,
           pin: true,
+          anticipatePin: 1,
         },
       });
 
-    tl
-      // 1) Headline block drifts up and fades
-      .to(".hero-headline, .hero-sub, .hero-ctas, .hero-trust", {
-        yPercent: -40,
-        opacity: 0,
-        stagger: 0.03,
-        ease: "power2.in",
-      }, 0)
+      tl
+        // 1) Headline block drifts up and fades
+        .to(
+          ".hero-headline, .hero-sub, .hero-ctas, .hero-trust",
+          {
+            yPercent: -40,
+            opacity: 0,
+            stagger: 0.03,
+            ease: "power2.in",
+          },
+          0
+        )
 
-      // 2) Grass parts away to the sides and sinks
-      .to(".hero-grass-left", { xPercent: -110, yPercent: 60, ease: "power2.inOut" }, 0)
-      .to(".hero-grass-right", { xPercent: 110, yPercent: 60, ease: "power2.inOut" }, 0)
+        // 2) Rangolis wheel away to the sides
+        .to(
+          ".hero-rangoli-left",
+          { xPercent: -130, yPercent: 70, rotate: -50, ease: "power2.inOut" },
+          0
+        )
+        .to(
+          ".hero-rangoli-right",
+          { xPercent: 130, yPercent: 70, rotate: 50, ease: "power2.inOut" },
+          0
+        )
 
-      // 3) Dashboard pops: slides up to center stage and settles slightly smaller
-      .to(".hero-dashboard", {
-        yPercent: -56,
-        scale: 1.08,
-        ease: "power2.inOut",
-      }, 0.05)
+        // 3) Dashboard rises to center stage and grows slightly
+        .to(
+          ".hero-dashboard",
+          { yPercent: -56, scale: 1.08, ease: "power2.inOut" },
+          0.05
+        )
 
-      // 4) New ground rises into place
-      .to(".hero-ground-new", { yPercent: 18, ease: "power2.out" }, 0.35);
-  }, sectionRef);
+        // 4) New ground rises into place
+        .to(".hero-ground-new", { yPercent: 18, ease: "power2.out" }, 0.35);
+    }, sectionRef);
 
-  return () => ctx.revert();
-}, []);
-
+    return () => ctx.revert();
+  }, []);
 
   return (
     <section
-    ref={sectionRef}
-  id="hero"
-  className="relative flex h-[100svh] flex-col overflow-hidden rounded-b-[2.5rem]
-           bg-gradient-to-b from-[#EDE7F8] via-[#E3D9F5] to-[#D9CCF2]"
->
-<div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pt-14 text-center">
+      ref={sectionRef}
+      id="hero"
+      className="relative flex h-[100svh] flex-col overflow-hidden rounded-b-[2.5rem]
+                 bg-gradient-to-b from-[#EDE7F8] via-[#E3D9F5] to-[#D9CCF2]"
+    >
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pt-14 text-center">
         {/* Headline */}
         <h1 className="hero-headline mx-auto max-w-4xl text-5xl font-bold leading-tight tracking-tight text-brand-purple-dark md:text-7xl">
           Banking For The New{" "}
@@ -112,51 +160,39 @@ useLayoutEffect(() => {
           </span>
         </div>
 
-        {/* Dashboard — overflows the bottom edge, grass overlaps it */}
-<div className="hero-dashboard relative z-10 mx-auto mt-10 w-full max-w-5xl flex-1">
-  <Image
-    src="/images/hero/dashboard.png"
-    alt="Ezeepay agent dashboard"
-    width={1600}
-    height={1000}
-    priority
-    className="w-full rounded-t-2xl shadow-2xl shadow-brand-purple/25 ring-1 ring-black/5"
-  />
-</div>
+        {/* Dashboard — overflows the bottom edge */}
+        <div className="hero-dashboard relative z-10 mx-auto mt-10 w-full max-w-5xl flex-1">
+          <Image
+            src="/images/hero/dashboard.png"
+            alt="Ezeepay agent dashboard"
+            width={1600}
+            height={1000}
+            priority
+            className="w-full rounded-t-2xl shadow-2xl shadow-brand-purple/25"
+          />
+        </div>
       </div>
 
-      {/* Foreground grass — overlaps the dashboard bottom */}
-<div className="pointer-events-none absolute inset-x-0 bottom-0 z-20">
-  <Image
-    src="/images/hero/grass-right.png"
-    alt=""
-    width={900}
-    height={600}
-    priority
-    className="hero-grass-left absolute bottom-0 left-0 w-[58%] max-w-none"
-  />
-  <Image
-    src="/images/hero/grass-right.png"
-    alt=""
-    width={900}
-    height={600}
-    priority
-    className="hero-grass-right absolute bottom-0 right-0 w-[58%] max-w-none"
-  />
-</div>
+      {/* Foreground rangolis — ship invisible; GSAP reveals after hiding strokes */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20">
+        <div className="hero-rangoli-left invisible absolute bottom-0 left-0 w-[34vw] max-w-[520px] overflow-hidden">
+          <RangoliMandala className="w-full scale-110 text-brand-purple" />
+        </div>
+        <div className="hero-rangoli-right invisible absolute bottom-0 right-0 w-[34vw] max-w-[520px] overflow-hidden">
+          <RangoliLotus className="w-full scale-110 text-brand-purple" />
+        </div>
+      </div>
 
-{/* New ground — slides up as the grass leaves */}
-<div className="pointer-events-none absolute inset-x-0 bottom-0 z-[5]">
-  <Image
-    src="/images/hero/ground-new.png"
-    alt=""
-    width={2400}
-    height={500}
-    className="hero-ground-new w-full"
-  />
-</div>
-
-      {/* Spacer so grass has room to overlap */}
+      {/* New ground — rises as the rangolis leave */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[5]">
+        <Image
+          src="/images/hero/ground-new.png"
+          alt=""
+          width={2400}
+          height={500}
+          className="hero-ground-new w-full"
+        />
+      </div>
     </section>
   );
 }
