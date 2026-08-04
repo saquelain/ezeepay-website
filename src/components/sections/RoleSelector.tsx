@@ -64,7 +64,7 @@ export default function RoleSelector() {
   }, [active]);
 
   return (
-    <section className="bg-white px-6 py-24">
+    <section className="mx-4 rounded-[2.5rem] bg-[#F7F5FB] px-6 py-24 md:mx-8">
       <div className="mx-auto max-w-6xl">
         {/* Header */}
         <div className="mx-auto max-w-3xl text-center">

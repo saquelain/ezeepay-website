@@ -64,7 +64,7 @@ export default function StatsStrip() {
   return (
     <section
     ref={sectionRef}
-    className="rounded-t-[2.5rem] bg-brand-purple-light/40 px-6 py-24"
+    className="mx-4 rounded-[2.5rem] bg-brand-purple-light/40 px-6 py-24"
     >
       <div className="mx-auto max-w-[100rem]">
         {/* Header row */}
