@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, ArrowRight } from "lucide-react";
 import { FOOTER_LINKS, OFFICES, SOCIALS } from "@/lib/constants/navigation";
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
@@ -64,21 +64,22 @@ export default function Footer() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href="/download"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full
-                           bg-brand-orange px-5 py-3.5 text-[15px] font-medium leading-none text-white"
-              >
-                Download App →
-              </Link>
-              <Link
-                href="https://login.ezeepay.app"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full
-                           border border-white/25 px-5 py-3.5 text-[15px] font-medium leading-none
-                           text-white transition-colors hover:bg-white/10"
-              >
-                Partner Login
-              </Link>
+            <Link
+            href="/contact"
+            className="mt-8 inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-b from-[#FF9142] to-brand-orange px-8 py-4 text-[16px] font-medium leading-none text-white shadow-lg shadow-brand-orange/30 transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl hover:shadow-brand-orange/40"
+            >
+            Contact Us
+            {/* <ArrowRight size={18} /> */}
+            </Link>
+            <Link
+  href="https://login.ezeepay.app"
+  className="inline-flex items-center justify-center whitespace-nowrap rounded-full
+             bg-white px-5 py-3.5 text-[15px] font-medium leading-none
+             text-brand-purple-dark shadow-md shadow-black/20
+             transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-lg"
+>
+  Partner Login
+</Link>
             </div>
 
             <div className="mt-8 flex gap-3">
