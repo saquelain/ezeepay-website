@@ -68,7 +68,7 @@ export default function Testimonials() {
           <div className="mx-auto flex max-w-[90rem] flex-col items-start justify-between gap-8 px-6 md:flex-row md:items-end">
           <div>
             <h2 className="text-4xl font-semibold leading-tight text-brand-purple-dark md:text-5xl">
-                What Our customer say
+                What Our customers say
                 <br />
                 <span className="text-brand-purple">about the platform</span>
             </h2>
