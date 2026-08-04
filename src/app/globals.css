@@ -54,7 +54,7 @@ body {
 }
 
 /* Pause on hover */
-.animate-marquee:hover,
+/* .animate-marquee:hover,
 .animate-ticker:hover {
   animation-play-state: paused;
-}
+} */

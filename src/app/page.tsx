@@ -18,7 +18,7 @@ export default function Home() {
       <Testimonials />
       <TrustSecurity />
       <Resources />
-      <div className="h-[200vh]" />
+      {/* <div className="h-[200vh]" /> */}
     </>
   );
 }

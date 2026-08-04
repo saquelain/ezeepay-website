@@ -89,3 +89,55 @@ export const SERVICES_MENU = [
     description:
       "Silver and Gold plans now live for all agents. Protect shops from fire, theft, and natural disasters.",
   };
+
+  export const FOOTER_LINKS = {
+    services: [
+      { label: "Banking Services", href: "/services/banking" },
+      { label: "Utility Bill Payments", href: "/services/utility" },
+      { label: "Insurance Services", href: "/services/insurance" },
+      { label: "E-Governance Services", href: "/services/e-governance" },
+      { label: "Neo Banking Services", href: "/services/neo-banking" },
+    ],
+    company: [
+      { label: "Home", href: "/" },
+      { label: "About Us", href: "/about" },
+      { label: "Products", href: "/products" },
+      { label: "Blog", href: "/blog" },
+      { label: "Certificate", href: "/certificates" },
+      { label: "Contact Us", href: "/contact" },
+    ],
+    joinUs: [
+      { label: "Become An Agent", href: "/join/agent" },
+      { label: "Become A Distributor", href: "/join/distributor" },
+      { label: "Master Distributor", href: "/join/master-distributor" },
+      { label: "District Franchise", href: "/join/district-franchise" },
+    ],
+    legal: [
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms & Conditions", href: "/terms" },
+      { label: "Refund Policy", href: "/refund-policy" },
+    ],
+  };
+  
+  export const OFFICES = [
+    {
+      name: "Registered Office — Delhi",
+      address: "D-19, A.F.E - 1, Okhla Vihar, NFC New Delhi, 110025",
+    },
+    {
+      name: "Corporate Office — Noida",
+      address: "7th Floor, Bhutani Technopark, Tower D, Sector 127, Noida, UP 201313",
+    },
+    {
+      name: "Regional Office — Kolkata",
+      address: "PS Abacus Tower, 3rd Floor, Office No. 342, Action Area IIE, New Town, Kolkata 700157",
+    },
+  ];
+  
+  export const SOCIALS = [
+    { label: "Facebook", href: "https://facebook.com/ezeepay" },
+    { label: "LinkedIn", href: "https://linkedin.com/company/ezeepay" },
+    { label: "Twitter", href: "https://twitter.com/ezeepay" },
+    { label: "Instagram", href: "https://instagram.com/ezeepay" },
+    { label: "YouTube", href: "https://youtube.com/@ezeepay" },
+  ];

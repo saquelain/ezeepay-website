@@ -136,7 +136,7 @@ export default function TrustSecurity() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#120B22] px-6 py-24 text-white">
+    <section ref={sectionRef} className="mx-4 rounded-[2.5rem] bg-[#120B22] px-6 py-24 text-white">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-16 md:grid-cols-2">
           {/* ── Left: sticky header + doodle shield + badges ── */}
