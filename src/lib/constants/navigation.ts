@@ -48,8 +48,8 @@ export const SERVICES_MENU = [
       ],
     },
     {
-      category: "Neo Banking Services",
-      slug: "neo-banking",
+      category: "Account Opening Services",
+      slug: "account-opening",
       items: [
         { label: "Digital Bank Account", slug: "digital-bank-account" },
         { label: "Physical Card", slug: "physical-card" },
@@ -96,7 +96,7 @@ export const SERVICES_MENU = [
       { label: "Utility Bill Payments", href: "/services/utility" },
       { label: "Insurance Services", href: "/services/insurance" },
       { label: "E-Governance Services", href: "/services/e-governance" },
-      { label: "Neo Banking Services", href: "/services/neo-banking" },
+      { label: "Account Opening Services", href: "/services/account-opening" },
     ],
     company: [
       { label: "Home", href: "/" },

@@ -17,7 +17,7 @@ import {
     insurance: ShieldCheck,
     travel: Plane,
     "e-governance": FileBadge,
-    "neo-banking": Smartphone,
+    "account-opening": Smartphone,
   };
 
 import Link from "next/link";
