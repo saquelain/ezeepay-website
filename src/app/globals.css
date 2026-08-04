@@ -6,14 +6,10 @@
 }
 
 @theme {
-  /* Primary brand — purple (from the new creatives) */
-  --color-brand-purple: #5B2D8E;        /* main purple — buttons, links, highlights */
-  --color-brand-purple-dark: #3B1E66;   /* deep purple — headings, navbar text */
-  --color-brand-purple-light: #F3EEFA;  /* soft tint — hover states, section backgrounds */
-
-  /* Accent — orange from the logo, used sparingly (primary CTA only) */
+  --color-brand-purple: #5B2D8E;
+  --color-brand-purple-dark: #3B1E66;
+  --color-brand-purple-light: #F3EEFA;
   --color-brand-orange: #F47B20;
-
   --color-brand-grey: #6B7280;
 }
 
@@ -35,4 +31,30 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* ── Marquee (partners strip) ── */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 25s linear infinite;
+}
+
+/* ── Vertical ticker (transactions card) ── */
+@keyframes ticker-vertical {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+
+.animate-ticker {
+  animation: ticker-vertical 12s linear infinite;
+}
+
+/* Pause on hover */
+.animate-marquee:hover,
+.animate-ticker:hover {
+  animation-play-state: paused;
 }
