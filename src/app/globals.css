@@ -58,3 +58,98 @@ body {
 .animate-ticker:hover {
   animation-play-state: paused;
 } */
+
+
+/* ═══════════════════════════════════════════════════════════
+   ADD these to your globals.css (keep everything you already have)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Mouse-follow spotlight on light cards ── */
+.card-glow {
+  position: relative;
+}
+.card-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(91, 45, 142, 0.09),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+/* ── Same effect, tuned for the dark card ── */
+.card-glow-dark {
+  position: relative;
+}
+.card-glow-dark::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.07),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+.card-glow-dark:hover::before {
+  opacity: 1;
+}
+
+/* ── Fade the marquee edges instead of hard clipping ── */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    #000 12%,
+    #000 88%,
+    transparent
+  );
+}
+
+/* ── Dot grid texture (dark card) ── */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ── Alert card countdown bar (duration = alert interval) ── */
+@keyframes alert-progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+.animate-alert-progress {
+  animation: alert-progress 2.6s linear forwards;
+}
+
+/* ── Respect reduced motion for the CSS-only animations ── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee,
+  .animate-ticker,
+  .animate-alert-progress,
+  .animate-ping,
+  .animate-pulse {
+    animation: none !important;
+  }
+}
