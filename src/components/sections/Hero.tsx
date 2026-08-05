@@ -193,6 +193,14 @@ export default function Hero() {
           className="hero-ground-new w-full"
         />
       </div>
+      {/* Bottom fade transition into next section */}
+<div
+  className="pointer-events-none absolute -inset-x-2.5 -bottom-px z-30 h-52"
+  style={{
+    background:
+      "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 25%, rgba(255,255,255,1) 50%)",
+  }}
+/>
     </section>
   );
 }

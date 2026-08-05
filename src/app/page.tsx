@@ -7,11 +7,13 @@ import Testimonials from "@/components/sections/Testimonials";
 import TrustSecurity from "@/components/sections/TrustSecurity";
 import Resources from "@/components/sections/Resources";
 import FAQ from "@/components/sections/FAQ";
+import TrustedBy from "@/components/sections/TrustedBy";
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <TrustedBy />
       <StatsStrip />
       <ProductPillars />
       <RoleSelector />
