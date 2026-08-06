@@ -122,7 +122,7 @@ export default function StatsStrip() {
           {/* Right image */}
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl">
             <Image
-              src="/images/stats/street-market.png"
+              src="/images/stats/agent-helping.png"
               alt="Ezeepay kiosk in a local market"
               fill
               className="object-cover"

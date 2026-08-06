@@ -122,7 +122,7 @@ export default function Hero() {
 
         {/* Subheadline */}
         <p className="hero-sub mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-brand-grey">
-          Join 5,00,000+ agents earning with AEPS, money transfer, bill
+          Join 10,00,000+ agents earning with AEPS, money transfer, bill
           payments, travel booking, and 60+ services — with minimum investment
           and zero working capital.
         </p>
@@ -148,7 +148,7 @@ export default function Hero() {
         <div className="hero-trust mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[15px] font-medium text-brand-purple-dark">
           <span className="flex items-center gap-2">
             <Star size={18} className="fill-amber-400 text-amber-400" />
-            5,00,000+ Agents
+            10,00,000+ Agents
           </span>
           <span className="flex items-center gap-2">
             <ShieldCheck size={18} className="text-green-600" />
