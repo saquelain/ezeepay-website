@@ -73,7 +73,7 @@ export default function ServicesMegaMenu({
                 [mask-image:linear-gradient(to_right,black,transparent)]"
     />
 
-    <div className="absolute bottom-6 left-8 flex items-end gap-3 opacity-70">
+    {/* <div className="absolute bottom-6 left-8 flex items-end gap-3 opacity-70">
     <span className="flex h-11 w-11 -rotate-12 items-center justify-center rounded-xl
                     bg-white text-brand-purple shadow-lg shadow-brand-purple/15
                     ring-1 ring-brand-purple/10">
@@ -88,7 +88,7 @@ export default function ServicesMegaMenu({
                     ring-1 ring-brand-purple/10">
         <Wallet size={18} />
     </span>
-    </div>
+    </div> */}
 
     <div className="relative mx-auto grid max-w-7xl grid-cols-4 gap-x-10 gap-y-10 px-10 py-10">
       {SERVICES_MENU.map((category) => {
