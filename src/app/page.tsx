@@ -17,7 +17,7 @@ export default function Home() {
     <>
       <Hero />
       <TrustedBy />
-      {/* <ServicesShowcase /> */}
+      <ServicesShowcase />
       <ServicesOrbit />
       <StatsStrip />
       <ProductPillars />
