@@ -43,33 +43,39 @@ export default function Navbar() {
 
           {/* Links (desktop) */}
           <ul className="hidden items-center gap-8 lg:flex">
-            {NAV_LINKS.map((link) => (
-              <li
-                key={link.label}
-                onMouseEnter={() => setOpenMenu(link.hasMegaMenu ? link.label : null)}
-              >
-                <Link
-                  href={link.href}
-                  onClick={playClick}
-                  className={`flex items-center gap-1 py-7 font-medium transition-colors
-                              hover:text-brand-purple ${
-                                openMenu === link.label
-                                  ? "text-brand-purple"
-                                  : "text-brand-purple-dark"
-                              }`}
+            {NAV_LINKS.map((link) => {
+              const isOpen = openMenu === link.label;
+              const sharedClassName = `flex items-center gap-1 py-7 font-medium transition-colors
+                                        hover:text-brand-purple ${
+                                          isOpen ? "text-brand-purple" : "text-brand-purple-dark"
+                                        }`;
+              return (
+                <li
+                  key={link.label}
+                  onMouseEnter={() => setOpenMenu(link.hasMegaMenu ? link.label : null)}
                 >
-                  {link.label}
-                  {link.hasMegaMenu && (
-                    <ChevronDown
-                      size={16}
-                      className={`transition-transform duration-200 ${
-                        openMenu === link.label ? "rotate-180" : ""
-                      }`}
-                    />
+                  {link.hasMegaMenu ? (
+                    <button
+                      type="button"
+                      onClick={playClick}
+                      aria-haspopup="true"
+                      aria-expanded={isOpen}
+                      className={sharedClassName}
+                    >
+                      {link.label}
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                  ) : (
+                    <Link href={link.href} onClick={playClick} className={sharedClassName}>
+                      {link.label}
+                    </Link>
                   )}
-                </Link>
-              </li>
-            ))}
+                </li>
+              );
+            })}
           </ul>
 
           {/* Buttons (desktop) */}
