@@ -4,11 +4,26 @@ import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import FoundationLogo from "@/components/svg/FoundationLogo";
 
+const SESSION_KEY = "ezeepay-preloader-shown";
+
 export default function Preloader() {
   const overlayRef = useRef<HTMLDivElement>(null);
   const [done, setDone] = useState(false);
+  const [shouldRun, setShouldRun] = useState<boolean | null>(null);
 
   useLayoutEffect(() => {
+    const alreadyShown = sessionStorage.getItem(SESSION_KEY);
+    if (alreadyShown) {
+      setShouldRun(false);
+      setDone(true);
+      return;
+    }
+    setShouldRun(true);
+    sessionStorage.setItem(SESSION_KEY, "true");
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!shouldRun) return;
 
     document.documentElement.style.overflow = "hidden";
 
@@ -69,9 +84,9 @@ export default function Preloader() {
       document.documentElement.style.overflow = "";
       ctx.revert();
     };
-  }, []);
+  }, [shouldRun]);
 
-  if (done) return null;
+  if (shouldRun === null || done) return null;
 
   return (
     <div
