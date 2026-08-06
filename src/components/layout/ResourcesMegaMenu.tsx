@@ -1,13 +1,16 @@
 // ResourcesMegaMenu.tsx
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Newspaper, RefreshCcw, BadgeCheck, type LucideIcon } from "lucide-react";
+import { ArrowRight, Newspaper, Megaphone, BadgeCheck, Radio, Images, Trophy, type LucideIcon } from "lucide-react";
 import { RESOURCES_MENU, FEATURED_BLOG, FEATURED_UPDATE } from "@/lib/constants/navigation";
 
 const RESOURCE_ICONS: Record<string, LucideIcon> = {
   blog: Newspaper,
-  updates: RefreshCcw,
+  announcements: Megaphone,
   certificates: BadgeCheck,
+  "news-coverage": Radio,
+  "media-gallery": Images,
+  awards: Trophy,
 };
 
 function FeaturedCard({

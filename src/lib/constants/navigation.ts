@@ -70,8 +70,11 @@ export const SERVICES_MENU = [
 
   export const RESOURCES_MENU = [
     { label: "Blog", href: "/blog", icon: "blog" },
-    { label: "New Updates", href: "/updates", icon: "updates" },
+    { label: "Company Announcements", href: "/announcements", icon: "announcements" },
     { label: "Certificates", href: "/certificates", icon: "certificates" },
+    { label: "News Coverage", href: "/news-coverage", icon: "news-coverage" },
+    { label: "Media Gallery", href: "/media-gallery", icon: "media-gallery" },
+    { label: "Awards & Recognition", href: "/awards", icon: "awards" },
   ];
   
   export const FEATURED_BLOG = {
