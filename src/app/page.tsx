@@ -10,12 +10,15 @@ import FAQ from "@/components/sections/FAQ";
 import TrustedBy from "@/components/sections/TrustedBy";
 import YouTubeVideos from "@/components/sections/YouTubeVideos";
 import ImpactIndia from "@/components/sections/ImpactIndia";
-
+import ServicesShowcase from "@/components/sections/ServicesShowcase";
+import ServicesOrbit from "@/components/sections/ServicesOrbit";
 export default function Home() {
   return (
     <>
       <Hero />
       <TrustedBy />
+      {/* <ServicesShowcase /> */}
+      <ServicesOrbit />
       <StatsStrip />
       <ProductPillars />
       <ImpactIndia />
