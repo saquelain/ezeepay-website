@@ -1,16 +1,61 @@
 import Image from "next/image";
+import fs from "fs";
+import path from "path";
+import { imageSize } from "image-size";
 
-const PARTNERS = [
-  { name: "Partner 1", src: "/images/trusted-by/partner-1.png" },
-  { name: "Partner 2", src: "/images/trusted-by/partner-2.png" },
-  { name: "Partner 3", src: "/images/trusted-by/partner-3.png" },
-  { name: "Partner 4", src: "/images/trusted-by/partner-4.png" },
-  { name: "Partner 5", src: "/images/trusted-by/partner-5.png" },
-  { name: "Partner 6", src: "/images/trusted-by/partner-6.png" },
-  { name: "Partner 7", src: "/images/trusted-by/partner-7.png" },
-];
+const LOGO_HEIGHT = 32; // all logos render at this height; width scales proportionally
+
+function getPartnerLogos() {
+  const dir = path.join(process.cwd(), "public", "logos", "partners");
+
+  let files: string[] = [];
+  try {
+    files = fs.readdirSync(dir);
+  } catch {
+    return [];
+  }
+
+  const imageExtensions = [".png", ".jpg", ".jpeg", ".svg", ".webp"];
+
+  return files
+    .filter((file) => imageExtensions.includes(path.extname(file).toLowerCase()))
+    .sort()
+    .map((file) => {
+      const name = path
+        .basename(file, path.extname(file))
+        .replace(/[-_]/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+
+      const filePath = path.join(dir, file);
+      let width = 120;
+      let height = 40;
+
+      try {
+        const buffer = fs.readFileSync(filePath);
+        const dimensions = imageSize(buffer);
+        if (dimensions.width && dimensions.height) {
+          width = dimensions.width;
+          height = dimensions.height;
+        }
+      } catch {
+        // fall back to defaults above
+      }
+
+      const displayWidth = Math.round((width / height) * LOGO_HEIGHT);
+
+      return {
+        name,
+        src: `/logos/partners/${file}`,
+        width: displayWidth,
+      };
+    });
+}
 
 export default function TrustedBy() {
+  const partners = getPartnerLogos();
+
+  if (partners.length === 0) return null;
+
   return (
     <section className="relative bg-white px-6 py-16 mb-30">
       <div className="mx-auto max-w-6xl">
@@ -31,10 +76,11 @@ export default function TrustedBy() {
             className="animate-marquee flex w-max items-center gap-16"
             style={{ animationDuration: "30s" }}
           >
-            {[...PARTNERS, ...PARTNERS].map((partner, i) => (
+            {[...partners, ...partners].map((partner, i) => (
               <div
                 key={`${partner.name}-${i}`}
-                className="relative h-8 w-28 flex-shrink-0 grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                style={{ height: LOGO_HEIGHT, width: partner.width }}
+                className="relative flex-shrink-0 grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
               >
                 <Image
                   src={partner.src}
