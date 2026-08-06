@@ -76,9 +76,11 @@ export default function ServicesOrbit() {
     );
 
     const N = SERVICES.length;
+    const interactive: boolean[] = new Array(N).fill(true);
     const place = (i: number, p: number) => {
       const set = setters[i];
-      if (!set) return;
+      const el = bubbleRefs.current[i];
+      if (!set || !el) return;
       const deg = START_DEG + (END_DEG - START_DEG) * p;
       const rad = (deg * Math.PI) / 180;
       set.x(cx + R * Math.cos(rad));
@@ -86,6 +88,14 @@ export default function ServicesOrbit() {
       const lift = Math.max(0, Math.sin(rad));
       set.s(0.8 + 0.25 * lift);
       set.o(0.35 + 0.65 * Math.min(1, lift * 3));
+
+      /* Only bubbles clearly above the ground are hoverable/clickable */
+      const isInteractive = lift > 0.18;
+      if (interactive[i] !== isInteractive) {
+        interactive[i] = isInteractive;
+        el.style.pointerEvents = isInteractive ? "" : "none";
+        el.tabIndex = isInteractive ? 0 : -1; // keep keyboard order sane too
+      }
     };
 
     if (reduceMotion) {
