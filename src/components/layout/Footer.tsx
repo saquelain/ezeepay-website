@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Phone, Mail, ArrowRight } from "lucide-react";
 import { FOOTER_LINKS, OFFICES, SOCIALS } from "@/lib/constants/navigation";
+import FooterAssociations from "./FooterAssociations";
 
 const SOCIAL_ICONS: Record<string, React.ReactNode> = {
     Facebook: (
@@ -130,8 +131,11 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* Certifications & Associations */}
+        <FooterAssociations />
+
         {/* Bottom bar */}
-        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-7 text-sm text-white/50 md:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-6 text-sm text-white/50 md:flex-row">
           <p>© {new Date().getFullYear()} MJ Digital Services Pvt Ltd. All rights reserved.</p>
           <div className="flex flex-wrap gap-6">
             {FOOTER_LINKS.legal.map((l) => (
@@ -144,7 +148,7 @@ export default function Footer() {
       </div>
 
       {/* Giant watermark */}
-      <div aria-hidden="true" className="pointer-events-none select-none overflow-hidden">
+      <div aria-hidden="true" className="pointer-events-none -mt-[8vw] select-none overflow-hidden">
         <p className="translate-y-[22%] bg-gradient-to-b from-white/10 to-transparent bg-clip-text
                       text-center text-[18vw] font-black leading-none tracking-tight text-transparent">
           ezeepay
