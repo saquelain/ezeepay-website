@@ -1,3 +1,4 @@
+// ResourcesMegaMenu.tsx
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Newspaper, RefreshCcw, BadgeCheck, type LucideIcon } from "lucide-react";
@@ -12,12 +13,14 @@ const RESOURCE_ICONS: Record<string, LucideIcon> = {
 function FeaturedCard({
   item,
   tag,
+  onLinkClick,
 }: {
   item: typeof FEATURED_BLOG;
   tag: string;
+  onLinkClick?: () => void;
 }) {
   return (
-    <Link href={item.href} className="group/card block">
+    <Link href={item.href} onClick={onLinkClick} className="group/card block">
       <div className="relative mb-4 aspect-[16/10] overflow-hidden rounded-xl bg-brand-purple-light">
         <Image
           src={item.image}
@@ -38,7 +41,11 @@ function FeaturedCard({
   );
 }
 
-export default function ResourcesMegaMenu() {
+export default function ResourcesMegaMenu({
+  onLinkClick,
+}: {
+  onLinkClick?: () => void;
+}) {
   return (
     <div
       className="absolute inset-x-0 top-full overflow-hidden rounded-b-2xl border-t border-black/5
@@ -64,7 +71,7 @@ export default function ResourcesMegaMenu() {
               const Icon = RESOURCE_ICONS[res.icon];
               return (
                 <li key={res.href}>
-                  <Link href={res.href} className="group/res flex items-center gap-3">
+                  <Link href={res.href} onClick={onLinkClick} className="group/res flex items-center gap-3">
                     <span
                       className="flex h-10 w-10 items-center justify-center rounded-xl
                                  bg-brand-purple-light text-brand-purple transition-colors
@@ -89,12 +96,12 @@ export default function ResourcesMegaMenu() {
 
         {/* Column 2 — featured blog */}
         <div className="border-l border-black/5 pl-12">
-          <FeaturedCard item={FEATURED_BLOG} tag="From the Blog" />
+          <FeaturedCard item={FEATURED_BLOG} tag="From the Blog" onLinkClick={onLinkClick} />
         </div>
 
         {/* Column 3 — featured update */}
         <div className="border-l border-black/5 pl-12">
-          <FeaturedCard item={FEATURED_UPDATE} tag="New Update" />
+          <FeaturedCard item={FEATURED_UPDATE} tag="New Update" onLinkClick={onLinkClick} />
         </div>
       </div>
     </div>

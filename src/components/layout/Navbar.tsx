@@ -1,3 +1,4 @@
+// Navbar.tsx
 "use client";
 
 import Image from "next/image";
@@ -49,6 +50,7 @@ export default function Navbar() {
               >
                 <Link
                   href={link.href}
+                  onClick={playClick}
                   className={`flex items-center gap-1 py-7 font-medium transition-colors
                               hover:text-brand-purple ${
                                 openMenu === link.label
@@ -78,18 +80,18 @@ export default function Navbar() {
               onClick={playClick}
             />
             <Link
-  href="/download"
-  onClick={playClick}
-  className="inline-flex items-center justify-center whitespace-nowrap
-             rounded-full bg-gradient-to-b from-[#FF9142] to-brand-orange px-5 py-[17px]
-             text-[16px] font-medium leading-none text-white
-             shadow-lg shadow-brand-orange/30
-             transition-all duration-300 ease-out
-             hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl hover:shadow-brand-orange/40
-             active:translate-y-0 active:scale-100"
->
-  Download App
-</Link>
+              href="/download"
+              onClick={playClick}
+              className="inline-flex items-center justify-center whitespace-nowrap
+                         rounded-full bg-gradient-to-b from-[#FF9142] to-brand-orange px-5 py-[17px]
+                         text-[16px] font-medium leading-none text-white
+                         shadow-lg shadow-brand-orange/30
+                         transition-all duration-300 ease-out
+                         hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl hover:shadow-brand-orange/40
+                         active:translate-y-0 active:scale-100"
+            >
+              Download App
+            </Link>
           </div>
 
           {/* Hamburger (mobile) */}
@@ -103,8 +105,8 @@ export default function Navbar() {
         </nav>
 
         {/* Mega menus (desktop) */}
-        {openMenu === "Services" && <ServicesMegaMenu />}
-        {openMenu === "Resources" && <ResourcesMegaMenu />}
+        {openMenu === "Services" && <ServicesMegaMenu onLinkClick={playClick} />}
+        {openMenu === "Resources" && <ResourcesMegaMenu onLinkClick={playClick} />}
       </header>
 
       {/* Mobile menu — sibling of header so position:fixed works correctly */}

@@ -10,7 +10,10 @@ export function useClickSound(src = "/sounds/button-click.wav") {
       audioRef.current = new Audio(src);
       audioRef.current.volume = 0.5;
     }
-    audioRef.current.currentTime = 0; // rewind so rapid clicks retrigger
-    audioRef.current.play().catch(() => {}); // ignore autoplay-policy errors
+    audioRef.current.currentTime = 0;
+    audioRef.current
+      .play()
+      .then(() => console.log("[click sound] played OK"))
+      .catch((err) => console.error("[click sound] FAILED:", err.name, err.message));
   }, [src]);
 }
