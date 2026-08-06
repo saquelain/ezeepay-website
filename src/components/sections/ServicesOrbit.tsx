@@ -151,7 +151,7 @@ export default function ServicesOrbit() {
       </div>
 
       {/* ── Orbit stage ── */}
-      <div ref={stageRef} className="relative mx-auto mt-6 h-[440px] max-w-6xl md:h-[500px]">
+      <div ref={stageRef} className="relative mx-auto mt-15 h-[440px] max-w-6xl md:h-[500px]">
         {/* Center app tile */}
         <div className="absolute left-1/2 top-[54%] z-30 -translate-x-1/2 -translate-y-1/2 text-center">
           <div className="mx-auto flex h-28 w-28 items-center justify-center rounded-full bg-[#120B22] shadow-2xl shadow-brand-purple/30 ring-8 ring-white/60 md:h-32 md:w-32">
