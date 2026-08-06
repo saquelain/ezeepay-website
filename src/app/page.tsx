@@ -8,6 +8,7 @@ import TrustSecurity from "@/components/sections/TrustSecurity";
 import Resources from "@/components/sections/Resources";
 import FAQ from "@/components/sections/FAQ";
 import TrustedBy from "@/components/sections/TrustedBy";
+import YouTubeVideos from "@/components/sections/YouTubeVideos";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <TrustSecurity />
       <FAQ />
       <Resources />
+      <YouTubeVideos />
       {/* <div className="h-[200vh]" /> */}
     </>
   );
