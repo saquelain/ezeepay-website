@@ -156,7 +156,7 @@ export default function RoleSelector() {
                 src={role.image}
                 alt={role.tabBold}
                 fill
-                className="object-contain p-10"
+                className="object-cover"
             />
             </div>
         </div>
