@@ -9,6 +9,7 @@ import Resources from "@/components/sections/Resources";
 import FAQ from "@/components/sections/FAQ";
 import TrustedBy from "@/components/sections/TrustedBy";
 import YouTubeVideos from "@/components/sections/YouTubeVideos";
+import ImpactIndia from "@/components/sections/ImpactIndia";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <TrustedBy />
       <StatsStrip />
       <ProductPillars />
+      <ImpactIndia />
       <RoleSelector />
       <WhyEzeepay />
       <Testimonials />
