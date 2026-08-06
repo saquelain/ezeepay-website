@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FileCheck, Lock, Scale, Headset, Globe, Mail, Phone, Check } from "lucide-react";
 import ShieldDoodle from "@/components/svg/ShieldDoodle";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -223,12 +224,18 @@ export default function TrustSecurity() {
           </p>
 
           <div className="mt-4 flex flex-wrap items-start justify-between gap-6">
-            <div>
-              <h3 className="text-2xl font-bold">Arthmate</h3>
-              <p className="mt-1 text-sm text-brand-grey">
-                Grievance Redressal Officer: Ms. Deepika Rawat
-              </p>
-            </div>
+          <div>
+            <Image
+              src="/images/partners/trust/arthmate.png"
+              alt="Arthmate — Enabling Entrepreneurs"
+              width={200}
+              height={56}
+              className="h-10 w-auto object-contain"
+            />
+            <p className="mt-2 text-sm text-brand-grey">
+              Grievance Redressal Officer: Ms. Deepika Rawat
+            </p>
+          </div>
             <div className="space-y-1.5 text-sm text-brand-grey">
               <p className="flex items-center gap-2">
                 <Globe size={15} className="text-brand-purple" />
