@@ -114,7 +114,7 @@ export const SERVICES_MENU = [
     ],
     legal: [
       { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Terms & Conditions", href: "/terms" },
+      { label: "Terms & Conditions", href: "/terms-and-conditions" },
       { label: "Refund Policy", href: "/refund-policy" },
     ],
   };
