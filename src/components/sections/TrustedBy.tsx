@@ -57,7 +57,7 @@ export default function TrustedBy() {
   if (partners.length === 0) return null;
 
   return (
-    <section className="relative bg-white px-6 py-16 mb-30">
+    <section className="relative bg-white px-6 py-16 mb-0">
       <div className="mx-auto max-w-6xl">
         {/* Badge + divider line */}
         <div className="relative flex items-center justify-center">
