@@ -103,7 +103,13 @@ export default function Hero() {
         .to(".hero-ground-new", { yPercent: 18, ease: "power2.out" }, 0.35);
     }, sectionRef);
 
-    return () => ctx.revert();
+    const handleLoad = () => ScrollTrigger.refresh();
+  window.addEventListener("load", handleLoad);
+
+  return () => {
+    ctx.revert();
+    window.removeEventListener("load", handleLoad);
+  };
   }, []);
 
   return (
@@ -195,7 +201,7 @@ export default function Hero() {
       </div>
       {/* Bottom fade transition into next section */}
 <div
-  className="pointer-events-none absolute -inset-x-2.5 -bottom-px z-30 h-52"
+  className="pointer-events-none absolute inset-x-0 -bottom-px z-30 h-52"
   style={{
     background:
       "linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 25%, rgba(255,255,255,1) 50%)",
