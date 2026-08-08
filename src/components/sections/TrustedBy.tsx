@@ -5,6 +5,22 @@ import { imageSize } from "image-size";
 
 const LOGO_HEIGHT = 32; // all logos render at this height; width scales proportionally
 
+// Manual size overrides — keyed by exact filename in public/logos/partners/
+const SCALE_OVERRIDES: Record<string, number> = {
+  "azmarq.png": 1.3,
+  "bharat-billpay.svg": 1.8,
+  "decentro.svg": 1.3,
+  "mobikwik.svg": 2.9,
+  "nsdl-payments-bank.png": 0.8
+};
+
+// Logos with white/light text or marks that disappear on a white background —
+// these get a small dark chip behind them instead of sitting bare.
+const DARK_CHIP_LOGOS = new Set<string>([
+  "SABPAISA.png",
+  "inrdeals.png"
+]);
+
 function getPartnerLogos() {
   const dir = path.join(process.cwd(), "public", "logos", "partners");
 
@@ -41,12 +57,16 @@ function getPartnerLogos() {
         // fall back to defaults above
       }
 
-      const displayWidth = Math.round((width / height) * LOGO_HEIGHT);
+      const scale = SCALE_OVERRIDES[file] || 1;
+      const displayHeight = Math.round(LOGO_HEIGHT * scale);
+      const displayWidth = Math.round((width / height) * displayHeight);
 
       return {
         name,
         src: `/logos/partners/${file}`,
         width: displayWidth,
+        height: displayHeight,
+        needsDarkChip: DARK_CHIP_LOGOS.has(file),
       };
     });
 }
@@ -74,22 +94,46 @@ export default function TrustedBy() {
 
           <div
             className="animate-marquee flex w-max items-center gap-16"
-            style={{ animationDuration: "30s" }}
+            style={{ animationDuration: "300s" }}
           >
-            {[...partners, ...partners].map((partner, i) => (
-              <div
-                key={`${partner.name}-${i}`}
-                style={{ height: LOGO_HEIGHT, width: partner.width }}
-                className="relative flex-shrink-0 grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
-              >
-                <Image
-                  src={partner.src}
-                  alt={partner.name}
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            ))}
+            {[...partners, ...partners].map((partner, i) =>
+              partner.needsDarkChip ? (
+                <div
+                  key={`${partner.name}-${i}`}
+                  className="flex flex-shrink-0 items-center rounded-lg bg-[#120B22] px-4 py-2 opacity-70 transition-all duration-300 hover:opacity-100"
+                >
+                  <div
+                    className="relative"
+                    style={{ height: partner.height, width: partner.width }}
+                  >
+                    <Image
+                      src={partner.src}
+                      alt={partner.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div
+                  key={`${partner.name}-${i}`}
+                  style={{ height: LOGO_HEIGHT, width: partner.width }}
+                  className="relative flex flex-shrink-0 items-center transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+                >
+                  <div
+                    className="relative w-full"
+                    style={{ height: partner.height }}
+                  >
+                    <Image
+                      src={partner.src}
+                      alt={partner.name}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+              )
+            )}
           </div>
         </div>
       </div>
