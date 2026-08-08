@@ -12,6 +12,8 @@ import YouTubeVideos from "@/components/sections/YouTubeVideos";
 import ImpactIndia from "@/components/sections/ImpactIndia";
 import ServicesShowcase from "@/components/sections/ServicesShowcase";
 import ServicesOrbit from "@/components/sections/ServicesOrbit";
+import WhyJoinEzeepay from "@/components/sections/WhyJoinEzeepay";
+
 export default function Home() {
   return (
     <>
@@ -19,6 +21,7 @@ export default function Home() {
       <TrustedBy />
       <ServicesShowcase />
       <StatsStrip />
+      <WhyJoinEzeepay />
       <ProductPillars />
       <ImpactIndia />
       <RoleSelector />
