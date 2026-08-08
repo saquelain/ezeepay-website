@@ -4,37 +4,28 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
-import {
-  Fingerprint,
-  Send,
-  ReceiptText,
-  Smartphone,
-  CreditCard,
-  ScanLine,
-  Landmark,
-  ShieldCheck,
-  HandCoins,
-  IdCard,
-  Plane,
-  QrCode,
-  ArrowRight,
-  Wallet,
-} from "lucide-react";
+import { ScanLine, Landmark, ArrowRight, Wallet } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const SERVICES: { icon: LucideIcon; title: string; desc: string; href: string }[] = [
-  { icon: Fingerprint, title: "AEPS", desc: "Aadhaar-based cash withdrawal and balance enquiry with just a fingerprint.", href: "/services/banking" },
-  { icon: Send, title: "Money Transfer", desc: "Instant domestic money transfers to any bank account across India.", href: "/services/banking" },
-  { icon: ReceiptText, title: "BBPS Bills", desc: "Electricity, water, gas and more — every bill on Bharat BillPay.", href: "/services/utility" },
-  { icon: Smartphone, title: "Recharge", desc: "Mobile and DTH recharges for all operators, with full commission.", href: "/services/utility" },
-  { icon: CreditCard, title: "Micro ATM", desc: "Card-based cash withdrawals right at your shop counter.", href: "/services/banking" },
-  { icon: ScanLine, title: "Aadhaar Pay", desc: "Accept customer payments using only Aadhaar and a fingerprint.", href: "/services/banking" },
-  { icon: Landmark, title: "Account Opening", desc: "Open digital bank accounts for your customers in minutes.", href: "/services/account-opening" },
-  { icon: ShieldCheck, title: "Insurance", desc: "Health, motor, shop and device policies issued in minutes.", href: "/services/insurance" },
-  { icon: HandCoins, title: "Loans", desc: "Easy credit options for your customers through trusted partners.", href: "/services/account-opening" },
-  { icon: IdCard, title: "PAN Card", desc: "New PAN applications and corrections, processed fast.", href: "/services/e-governance" },
-  { icon: Plane, title: "Travel", desc: "IRCTC trains, flights, buses and hotels — booked from one window.", href: "/services/travel" },
-  { icon: QrCode, title: "UPI", desc: "Instant money transfers between bank accounts using UPI ID or QR code.", href: "/services/account-opening" },
+const SERVICES: {
+  icon?: LucideIcon;
+  iconSrc?: string;
+  title: string;
+  desc: string;
+  href: string;
+}[] = [
+  { iconSrc: "/icons/services/aeps.svg", title: "AEPS", desc: "Aadhaar-based cash withdrawal and balance enquiry with just a fingerprint.", href: "/services/banking" },
+  { iconSrc: "/icons/services/money-transfer.svg", title: "Money Transfer", desc: "Instant domestic money transfers to any bank account across India.", href: "/services/banking" },
+  { iconSrc: "/icons/services/bbps-bills.svg", title: "BBPS Bills", desc: "Electricity, water, gas and more — every bill on Bharat BillPay.", href: "/services/utility" },
+  { iconSrc: "/icons/services/recharge.svg", title: "Recharge", desc: "Mobile and DTH recharges for all operators, with full commission.", href: "/services/utility" },
+  { iconSrc: "/icons/services/micro-atm.svg", title: "Micro ATM", desc: "Card-based cash withdrawals right at your shop counter.", href: "/services/banking" },
+  { iconSrc: "/icons/services/aadhaar-pay.svg", title: "Aadhaar Pay", desc: "Accept customer payments using only Aadhaar and a fingerprint.", href: "/services/banking" },
+  { iconSrc: "/icons/services/account-opening.svg", title: "Account Opening", desc: "Open digital bank accounts for your customers in minutes.", href: "/services/account-opening" },
+  { iconSrc: "/icons/services/insurance.svg", title: "Insurance", desc: "Health, motor, shop and device policies issued in minutes.", href: "/services/insurance" },
+  { iconSrc: "/icons/services/loans.svg", title: "Loans", desc: "Easy credit options for your customers through trusted partners.", href: "/services/account-opening" },
+  { iconSrc: "/icons/services/pan-card.svg", title: "PAN Card", desc: "New PAN applications and corrections, processed fast.", href: "/services/e-governance" },
+  { iconSrc: "/icons/services/travel.svg", title: "Travel", desc: "IRCTC trains, flights, buses and hotels — booked from one window.", href: "/services/travel" },
+  { iconSrc: "/icons/services/upi.svg", title: "UPI", desc: "Instant money transfers between bank accounts using UPI ID or QR code.", href: "/services/account-opening" },
 ];
 
 /* Arc geometry: 180° = left horizon, 0° = right horizon (degrees) */
@@ -165,7 +156,7 @@ export default function ServicesOrbit() {
         </div>
 
         {/* Orbiting service bubbles — clickable, pause + label + color flip on hover */}
-        {SERVICES.map(({ icon: Icon, title, desc, href }, i) => (
+        {SERVICES.map(({ icon: Icon, iconSrc, title, desc, href }, i) => (
           <Link
             key={title}
             href={href}
@@ -182,10 +173,20 @@ export default function ServicesOrbit() {
           >
             {/* Inner bubble carries the hover visuals (outer is GSAP-scaled) */}
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-lg shadow-brand-purple/15 ring-1 ring-black/5 transition-all duration-300 group-hover:bg-brand-purple group-hover:shadow-xl group-hover:shadow-brand-purple/30 group-hover:ring-brand-purple/30 md:h-[4.5rem] md:w-[4.5rem]">
-              <Icon
-                size={26}
+            {iconSrc ? (
+            <Image
+                src={iconSrc}
+                alt=""
+                width={38}
+                height={38}
+                className="h-[38px] w-[38px] object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert md:h-11 md:w-11"
+            />
+            ) : Icon ? (
+            <Icon
+                size={30}
                 className="text-brand-purple transition-colors duration-300 group-hover:text-white"
-              />
+            />
+            ) : null}
             </span>
 
             {/* Chat-bubble tooltip — pops from 0 to full size on hover */}

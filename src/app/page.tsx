@@ -18,7 +18,6 @@ export default function Home() {
       <Hero />
       <TrustedBy />
       <ServicesShowcase />
-      <ServicesOrbit />
       <StatsStrip />
       <ProductPillars />
       <ImpactIndia />
@@ -26,6 +25,7 @@ export default function Home() {
       <WhyEzeepay />
       <Testimonials />
       <TrustSecurity />
+      <ServicesOrbit />
       <FAQ />
       <Resources />
       <YouTubeVideos />

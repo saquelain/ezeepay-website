@@ -2,102 +2,89 @@
 
 import { useLayoutEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  Fingerprint,
-  Send,
-  ReceiptText,
-  Smartphone,
-  CreditCard,
-  ScanLine,
-  Landmark,
-  ShieldCheck,
-  HandCoins,
-  IdCard,
-  Plane,
-  QrCode,
-  ArrowRight,
-  LayoutGrid,
-} from "lucide-react";
+import { ScanLine, Landmark, ArrowRight, LayoutGrid } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const SERVICES: {
-  icon: LucideIcon;
+  icon?: LucideIcon;      // fallback Lucide icon (only for items with no custom SVG yet)
+  iconSrc?: string;       // custom SVG path — takes priority over `icon` when present
   title: string;
   desc: string;
   href: string;
 }[] = [
   {
-    icon: Fingerprint,
+    iconSrc: "/icons/services/aeps.svg",
     title: "AEPS",
     desc: "Aadhaar-based cash withdrawal & balance enquiry.",
     href: "/services/banking",
   },
   {
-    icon: Send,
+    iconSrc: "/icons/services/money-transfer.svg",
     title: "Money Transfer (DMT)",
     desc: "Instant domestic transfers to any bank account.",
     href: "/services/banking",
   },
   {
-    icon: ReceiptText,
+    iconSrc: "/icons/services/bbps-bills.svg",
     title: "BBPS Bill Payments",
     desc: "Electricity, water, gas & more on Bharat BillPay.",
     href: "/services/utility",
   },
   {
-    icon: Smartphone,
+    iconSrc: "/icons/services/recharge.svg",
     title: "Mobile & DTH Recharge",
     desc: "All operators, full commission on every recharge.",
     href: "/services/utility",
   },
   {
-    icon: CreditCard,
+    iconSrc: "/icons/services/micro-atm.svg",
     title: "Micro ATM",
     desc: "Card-based withdrawals right at your counter.",
     href: "/services/banking",
   },
   {
-    icon: ScanLine,
+    iconSrc: "icons/services/aadhaar-pay.svg",
     title: "Aadhaar Pay",
     desc: "Accept payments with just Aadhaar & fingerprint.",
     href: "/services/banking",
   },
   {
-    icon: Landmark,
+    iconSrc: "/icons/services/account-opening.svg",
     title: "Account Opening",
     desc: "Open digital bank accounts for your customers.",
     href: "/services/account-opening",
   },
   {
-    icon: ShieldCheck,
+    iconSrc: "/icons/services/insurance.svg",
     title: "Insurance",
     desc: "Health, motor, shop & device policies in minutes.",
     href: "/services/insurance",
   },
   {
-    icon: HandCoins,
+    iconSrc: "/icons/services/loans.svg",
     title: "Loans",
     desc: "Easy credit options through trusted partners.",
     href: "/services/account-opening",
   },
   {
-    icon: IdCard,
+    iconSrc: "/icons/services/pan-card.svg",
     title: "PAN Card",
     desc: "New PAN applications & corrections, done fast.",
     href: "/services/e-governance",
   },
   {
-    icon: Plane,
+    iconSrc: "/icons/services/travel.svg",
     title: "Travel Booking",
     desc: "IRCTC, flights, buses & hotels — one window.",
     href: "/services/travel",
   },
   {
-    icon: QrCode,
+    iconSrc: "/icons/services/upi.svg",
     title: "UPI Payments",
     desc: "Collect payments instantly with UPI & QR.",
     href: "/services/account-opening",
@@ -154,7 +141,7 @@ export default function ServicesShowcase() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-white px-6 py-24">
+    <section ref={sectionRef} className="relative overflow-hidden bg-white px-6">
       {/* Soft ambient wash */}
       <div
         aria-hidden
@@ -180,7 +167,7 @@ export default function ServicesShowcase() {
 
         {/* ── Services grid ── */}
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {SERVICES.map(({ icon: Icon, title, desc, href }) => (
+          {SERVICES.map(({ icon: Icon, iconSrc, title, desc, href }) => (
             <Link
               key={title}
               href={href}
@@ -194,8 +181,12 @@ export default function ServicesShowcase() {
 
               <div className="flex items-start justify-between">
                 {/* Icon tile — flips to solid purple on hover */}
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-purple-light text-brand-purple transition-all duration-300 group-hover:bg-brand-purple group-hover:text-white">
-                  <Icon size={22} />
+                <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-brand-purple-light text-brand-purple transition-all duration-300 group-hover:bg-brand-purple group-hover:text-white">
+                  {iconSrc ? (
+                    <Image src={iconSrc} alt="" width={34} height={34} className="h-[34px] w-[34px] object-contain" />
+                  ) : Icon ? (
+                    <Icon size={26} />
+                  ) : null}
                 </span>
                 <ArrowRight
                   size={18}
