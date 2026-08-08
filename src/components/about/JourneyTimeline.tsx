@@ -256,8 +256,19 @@ export default function JourneyTimeline() {
         ref={sectionRef}
         className="relative hidden overflow-hidden bg-[#F7F5FB] lg:flex lg:h-screen lg:flex-col lg:justify-center"
         >
+        {/* Doodle background — tiled, low opacity, purple bg shows through */}
+        <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-0 opacity-[0.14]"
+            style={{
+            backgroundImage: "url('/images/journey/doodle-bg.png')",
+            backgroundRepeat: "repeat",
+            backgroundSize: "420px auto",
+            }}
+        />
+
         {/* Header + progress (stays put while the road travels) */}
-        <div className="mx-auto max-w-6xl px-6">
+        <div className="relative z-10 mx-auto max-w-6xl px-6">
           <div className="flex items-end justify-between gap-8">
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
@@ -300,7 +311,7 @@ export default function JourneyTimeline() {
           </div>
 
         {/* The travelling road */}
-        <div className="mt-10">
+        <div className="relative z-10 mt-10">
           <div ref={trackRef} className="relative flex" style={{ width: TRACK_W, height: STAGE_H }}>
             {/* Road SVG spanning the whole track */}
             <svg
@@ -444,8 +455,17 @@ export default function JourneyTimeline() {
       </section>
 
       {/* ════════ Mobile / tablet: simple vertical timeline ════════ */}
-      <section className="bg-[#F7F5FB] px-6 py-16 lg:hidden">
-        <div className="mx-auto max-w-xl">
+      <section className="relative overflow-hidden bg-[#F7F5FB] px-6 py-16 lg:hidden">
+        <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-0 opacity-[0.14]"
+            style={{
+            backgroundImage: "url('/images/journey/doodle-bg.png')",
+            backgroundRepeat: "repeat",
+            backgroundSize: "280px auto",
+            }}
+        />
+        <div className="relative z-10 mx-auto max-w-xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
             <Flag size={13} />
             Our Journey
