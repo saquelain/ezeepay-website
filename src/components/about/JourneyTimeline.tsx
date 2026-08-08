@@ -3,6 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Image from "next/image";
 import { Flag, MoveRight, Store, TrendingUp } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,95 +15,106 @@ type Milestone = {
   title: string;
   desc: string;
   stats: Stat[];
+  image: string;
   projected?: boolean;
 };
 
 const MILESTONES: Milestone[] = [
-  {
-    year: "2018",
-    title: "The Beginning of a Revolutionary Journey",
-    desc: "MJ Digital Services Private Limited launched its flagship brand, Ezeepay — onboarding over 1,500 retailers and introducing essential services like AEPS and Money Transfer, with a vision to bridge financial gaps in rural areas and create additional income for rural shopkeepers.",
-    stats: [
-      { label: "Active Retailers", value: 1300 },
-      { label: "Transaction Volume", value: 12, prefix: "₹", suffix: " Cr" },
-    ],
-  },
-  {
-    year: "2019",
-    title: "Expanding Horizons with New Services",
-    desc: "A year of growth and innovation — the network expanded to over 6,500 retailers, we introduced Recharge, Flight & Hotel Booking, strengthened our rural presence, and launched our distributor network with 200 active distributors.",
-    stats: [
-      { label: "Active Retailers", value: 5000 },
-      { label: "Transaction Volume", value: 60, prefix: "₹", suffix: " Cr" },
-    ],
-  },
-  {
-    year: "2020",
-    title: "Empowering Retailers and Customers Alike",
-    desc: "During the pandemic, rush-free banking became essential in rural areas. Ezeepay answered with zero-touch banking, crossed 100,000 retailers, introduced the Ezeepay Micro ATM, and empowered 1,000 dedicated distributors.",
-    stats: [
-      { label: "Active Retailers", value: 49550 },
-      { label: "Transaction Volume", value: 300, prefix: "₹", suffix: " Cr" },
-    ],
-  },
-  {
-    year: "2021",
-    title: "Scaling New Heights with Innovation",
-    desc: "Another challenging pandemic year became a period of scaling and diversification — 300,000+ retailers, new offerings like Micro Finance and E-Governance, and a presence across 5,000 pincodes made Ezeepay a trusted name in rural India.",
-    stats: [
-      { label: "Active Retailers", value: 70000 },
-      { label: "Transaction Volume", value: 900, prefix: "₹", suffix: " Cr" },
-    ],
-  },
-  {
-    year: "2022",
-    title: "Commitment to Growth and Excellence",
-    desc: "The retailer network crossed 500,000 with advanced distributor modules and PAN card services, setting new transaction records — and actor Mr. Jimmy Shergill signed on as brand ambassador, strengthening our brand presence.",
-    stats: [
-      { label: "Active Retailers", value: 98000 },
-      { label: "Transaction Volume", value: 2200, prefix: "₹", suffix: " Cr" },
-    ],
-  },
-  {
-    year: "2023",
-    title: "Strengthening Our Leadership Position",
-    desc: "An impressive milestone of 650,000 retailers, the launch of the Block Level Franchise to empower rural business owners, 5,000+ distributors, and record-breaking transaction volume backed by campaigns with our brand ambassador.",
-    stats: [
-      { label: "Active Retailers", value: 120000 },
-      { label: "Transaction Volume", value: 3000, prefix: "₹", suffix: " Cr" },
-    ],
-  },
-  {
-    year: "2024",
-    title: "Achieving Unparalleled Success Across India",
-    desc: "A historic year — Ezeepay surpassed 750,000 retailers, opened multiple offices nationwide, and introduced the Physical Verification Team for the new KYC model, reinforcing our position as a leading fintech service provider.",
-    stats: [
-      { label: "Active Retailers", value: 160000 },
-      { label: "Transaction Volume", value: 5400, prefix: "₹", suffix: " Cr" },
-    ],
-  },
-  {
-    year: "2025",
-    title: "Reaching Every Corner of India",
-    desc: "Ezeepay aims to cover all 19,000 pincodes across India and expand to over 1.5 million retailers — integrating AI banking features to revolutionise how banking services reach rural communities.",
-    stats: [{ label: "Expected Transaction Volume", value: 7500, prefix: "₹", suffix: " Cr" }],
-    projected: true,
-  },
-  {
-    year: "2026",
-    title: "Advancing with Technology and Innovation",
-    desc: "A major technological leap — advanced technologies and upgraded services for greater operational efficiency, with a retailer base exceeding 3 million delivering smarter, faster financial solutions nationwide.",
-    stats: [{ label: "Expected Transaction Volume", value: 10000, prefix: "₹", suffix: " Cr" }],
-    projected: true,
-  },
-  {
-    year: "2027",
-    title: "Dominating the Fintech Landscape",
-    desc: "Ezeepay is set to become a dominant force in Indian fintech — an all-encompassing range of financial services making us the go-to platform for every financial need, impacting millions of lives.",
-    stats: [{ label: "Expected Transaction Volume", value: 15000, prefix: "₹", suffix: " Cr" }],
-    projected: true,
-  },
-];
+    {
+      year: "2018",
+      title: "The Beginning of a Revolutionary Journey",
+      desc: "MJ Digital Services Private Limited launched its flagship brand, Ezeepay — onboarding over 1,500 retailers and introducing essential services like AEPS and Money Transfer, with a vision to bridge financial gaps in rural areas and create additional income for rural shopkeepers.",
+      stats: [
+        { label: "Active Retailers", value: 1300 },
+        { label: "Transaction Volume", value: 12, prefix: "₹", suffix: " Cr" },
+      ],
+      image: "/images/journey/2018-beginning.png",
+    },
+    {
+      year: "2019",
+      title: "Expanding Horizons with New Services",
+      desc: "A year of growth and innovation — the network expanded to over 6,500 retailers, we introduced Recharge, Flight & Hotel Booking, strengthened our rural presence, and launched our distributor network with 200 active distributors.",
+      stats: [
+        { label: "Active Retailers", value: 5000 },
+        { label: "Transaction Volume", value: 60, prefix: "₹", suffix: " Cr" },
+      ],
+      image: "/images/journey/2019-expanding.png",
+    },
+    {
+      year: "2020",
+      title: "Empowering Retailers and Customers Alike",
+      desc: "During the pandemic, rush-free banking became essential in rural areas. Ezeepay answered with zero-touch banking, crossed 100,000 retailers, introduced the Ezeepay Micro ATM, and empowered 1,000 dedicated distributors.",
+      stats: [
+        { label: "Active Retailers", value: 49550 },
+        { label: "Transaction Volume", value: 300, prefix: "₹", suffix: " Cr" },
+      ],
+      image: "/images/journey/2020-empowering.png",
+    },
+    {
+      year: "2021",
+      title: "Scaling New Heights with Innovation",
+      desc: "Another challenging pandemic year became a period of scaling and diversification — 300,000+ retailers, new offerings like Micro Finance and E-Governance, and a presence across 5,000 pincodes made Ezeepay a trusted name in rural India.",
+      stats: [
+        { label: "Active Retailers", value: 70000 },
+        { label: "Transaction Volume", value: 900, prefix: "₹", suffix: " Cr" },
+      ],
+      image: "/images/journey/2021-scaling.png",
+    },
+    {
+      year: "2022",
+      title: "Commitment to Growth and Excellence",
+      desc: "The retailer network crossed 500,000 with advanced distributor modules and PAN card services, setting new transaction records — and actor Mr. Jimmy Shergill signed on as brand ambassador, strengthening our brand presence.",
+      stats: [
+        { label: "Active Retailers", value: 98000 },
+        { label: "Transaction Volume", value: 2200, prefix: "₹", suffix: " Cr" },
+      ],
+      image: "/images/journey/2022-commitment.png",
+    },
+    {
+      year: "2023",
+      title: "Strengthening Our Leadership Position",
+      desc: "An impressive milestone of 650,000 retailers, the launch of the Block Level Franchise to empower rural business owners, 5,000+ distributors, and record-breaking transaction volume backed by campaigns with our brand ambassador.",
+      stats: [
+        { label: "Active Retailers", value: 120000 },
+        { label: "Transaction Volume", value: 3000, prefix: "₹", suffix: " Cr" },
+      ],
+      image: "/images/journey/2023-leadership.png",
+    },
+    {
+      year: "2024",
+      title: "Achieving Unparalleled Success Across India",
+      desc: "A historic year — Ezeepay surpassed 750,000 retailers, opened multiple offices nationwide, and introduced the Physical Verification Team for the new KYC model, reinforcing our position as a leading fintech service provider.",
+      stats: [
+        { label: "Active Retailers", value: 160000 },
+        { label: "Transaction Volume", value: 5400, prefix: "₹", suffix: " Cr" },
+      ],
+      image: "/images/journey/2024-success.png",
+    },
+    {
+      year: "2025",
+      title: "Reaching Every Corner of India",
+      desc: "Ezeepay aims to cover all 19,000 pincodes across India and expand to over 1.5 million retailers — integrating AI banking features to revolutionise how banking services reach rural communities.",
+      stats: [{ label: "Expected Transaction Volume", value: 7500, prefix: "₹", suffix: " Cr" }],
+      image: "/images/journey/2025-reaching.png",
+      projected: true,
+    },
+    {
+      year: "2026",
+      title: "Advancing with Technology and Innovation",
+      desc: "A major technological leap — advanced technologies and upgraded services for greater operational efficiency, with a retailer base exceeding 3 million delivering smarter, faster financial solutions nationwide.",
+      stats: [{ label: "Expected Transaction Volume", value: 10000, prefix: "₹", suffix: " Cr" }],
+      image: "/images/journey/2026-advancing.png",
+      projected: true,
+    },
+    {
+      year: "2027",
+      title: "Dominating the Fintech Landscape",
+      desc: "Ezeepay is set to become a dominant force in Indian fintech — an all-encompassing range of financial services making us the go-to platform for every financial need, impacting millions of lives.",
+      stats: [{ label: "Expected Transaction Volume", value: 15000, prefix: "₹", suffix: " Cr" }],
+      image: "/images/journey/2027-dominating.png",
+      projected: true,
+    },
+  ];
 
 /* ── Layout constants (shared by panels and the road SVG) ── */
 const INTRO_W = 560;
@@ -370,50 +382,60 @@ export default function JourneyTimeline() {
 
                   {/* Card on the opposite side of the road */}
                   <div
-                    className="jt-card absolute left-1/2 w-[520px] -translate-x-1/2 rounded-3xl bg-white p-6 shadow-xl shadow-brand-purple/10 ring-1 ring-black/5"
+                    className="jt-card absolute left-1/2 w-[560px] -translate-x-1/2 rounded-3xl bg-white p-7 shadow-xl shadow-brand-purple/10 ring-1 ring-black/5"
                     data-origin={cardBelow ? "top" : "bottom"}
                     style={
-                      cardBelow
+                        cardBelow
                         ? { top: node.y + 52, marginLeft: jitter }
                         : { bottom: STAGE_H - node.y + 52, marginLeft: jitter }
                     }
-                  >
-                    <div className="flex items-start justify-between gap-3">
-                      <h3 className="text-lg font-bold leading-snug text-brand-purple-dark">
-                        {m.title}
-                      </h3>
-                      {m.projected && (
-                        <span className="flex-shrink-0 rounded-full bg-brand-orange/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand-orange">
-                          Projected
+                    >
+                    <div className="flex gap-5">
+                        {/* Milestone image */}
+                        <span className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-2xl bg-brand-orange/10">
+                            <Image src={m.image} alt={m.title} fill className="object-cover" />
                         </span>
-                      )}
-                    </div>
-                    <p className="mt-2 text-sm leading-relaxed text-brand-grey">{m.desc}</p>
 
-                    <div className="mt-4 flex flex-wrap gap-2.5">
-                      {m.stats.map((s) => (
-                        <span
-                          key={s.label}
-                          className="inline-flex items-center gap-2 rounded-xl bg-[#F7F5FB] px-3 py-2"
-                        >
-                          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-purple-light text-brand-purple">
-                            {s.label.includes("Retailer") ? <Store size={14} /> : <TrendingUp size={14} />}
-                          </span>
-                          <span className="text-[11px] leading-tight text-brand-grey">
-                            {s.label}
-                            <span
-                              className="jt-num block text-sm font-bold text-brand-purple-dark"
-                              data-value={s.value}
-                              data-prefix={s.prefix || ""}
-                              data-suffix={s.suffix || ""}
-                            >
-                              {(s.prefix || "") + fmt(s.value) + (s.suffix || "")}
+                        <div className="min-w-0 flex-1">
+                        <div className="flex items-start justify-between gap-3">
+                            <h3 className="text-lg font-bold uppercase leading-snug tracking-tight text-brand-purple-dark">
+                            {m.title}
+                            </h3>
+                            {m.projected && (
+                            <span className="flex-shrink-0 rounded-full bg-brand-orange/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-brand-orange">
+                                Projected
                             </span>
-                          </span>
-                        </span>
-                      ))}
+                            )}
+                        </div>
+                        <p className="mt-2 text-sm leading-relaxed text-brand-grey">{m.desc}</p>
+                        </div>
                     </div>
-                  </div>
+
+                    {/* Stat pills — circular icon badge + label/value, matching reference */}
+                    <div className="mt-5 flex flex-wrap gap-3">
+                        {m.stats.map((s) => (
+                        <span
+                            key={s.label}
+                            className="inline-flex items-center gap-2.5 rounded-full bg-[#F7F5FB] py-1.5 pl-1.5 pr-4"
+                        >
+                            <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-white ring-2 ring-brand-orange/30 text-brand-purple">
+                            {s.label.includes("Retailer") ? <Store size={16} /> : <TrendingUp size={16} />}
+                            </span>
+                            <span className="flex flex-col leading-tight">
+                            <span className="text-[11px] font-medium text-brand-grey">{s.label}</span>
+                            <span
+                                className="jt-num text-sm font-bold text-brand-purple-dark"
+                                data-value={s.value}
+                                data-prefix={s.prefix || ""}
+                                data-suffix={s.suffix || ""}
+                            >
+                                {(s.prefix || "") + fmt(s.value) + (s.suffix || "")}
+                            </span>
+                            </span>
+                        </span>
+                        ))}
+                    </div>
+                    </div>
                 </div>
               );
             })}
