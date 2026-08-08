@@ -141,7 +141,7 @@ export default function ServicesShowcase() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-white px-6">
+    <section ref={sectionRef} className="relative overflow-hidden bg-white px-6 py-20">
       {/* Soft ambient wash */}
       <div
         aria-hidden
