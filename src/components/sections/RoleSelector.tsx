@@ -16,7 +16,7 @@ const ROLES = [
     image: "/images/roles/agent.png",
     ctas: [
       { label: "Apply Online", href: "/apply", primary: true },
-      { label: "Download App", href: "/download", primary: false },
+      { label: "Download App", href: "https://play.google.com/store/apps/details?id=com.EzeePay_DigitalBharat&pli=1", primary: false },
     ],
   },
   {
@@ -127,13 +127,15 @@ export default function RoleSelector() {
                     <ArrowRight size={18} />
                   </Link>
                 ) : (
-                  <Link
+                  <a
                     key={cta.label}
                     href={cta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-7 py-4 text-[16px] font-medium leading-none text-brand-purple-dark"
                   >
                     {cta.label}
-                  </Link>
+                  </a>
                 )
               )}
             </div>

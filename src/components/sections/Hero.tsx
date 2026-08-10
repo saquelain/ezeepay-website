@@ -11,6 +11,9 @@ import RangoliLotus from "@/components/svg/RangoliLotus";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.EzeePay_DigitalBharat&pli=1";
+
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -135,13 +138,15 @@ export default function Hero() {
 
         {/* CTAs */}
         <div className="hero-ctas mt-8 flex items-center justify-center gap-4">
-          <Link
-            href="/download"
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-full bg-brand-purple px-7 py-4 text-[16px] font-medium leading-none text-white
                        shadow-lg shadow-brand-purple/30"
           >
             Download App
-          </Link>
+          </a>
           <Link
             href="/join"
             className="rounded-full border border-black/10 bg-white px-7 py-4 text-[16px] font-medium leading-none text-black"

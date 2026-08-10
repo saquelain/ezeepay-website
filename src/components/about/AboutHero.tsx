@@ -20,6 +20,9 @@ declare global {
   }
 }
 
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.EzeePay_DigitalBharat&pli=1";
+
 export default function AboutHero() {
   const playerRef = useRef<YTPlayer | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -140,7 +143,9 @@ export default function AboutHero() {
 
         {/* Floating CTA badge */}
         <a
-            href="/download"
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
             className="absolute -bottom-6 right-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-brand-purple-dark shadow-xl transition-transform duration-300 hover:-translate-y-0.5 hover:scale-105 sm:right-10"
         >

@@ -11,6 +11,9 @@ type Props = {
   onButtonClick: () => void;
 };
 
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.EzeePay_DigitalBharat&pli=1";
+
 export default function MobileMenu({ open, onClose, onButtonClick }: Props) {
   const [expanded, setExpanded] = useState<string | null>(null);
 
@@ -114,14 +117,16 @@ export default function MobileMenu({ open, onClose, onButtonClick }: Props) {
           >
             Partner Login
           </Link>
-          <Link
-            href="/download"
+          <a
+            href={PLAY_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => { onButtonClick(); onClose(); }}
             className="flex items-center justify-center rounded-full bg-black py-4
                        text-[16px] font-medium text-white"
           >
             Download App
-          </Link>
+          </a>
         </div>
       </div>
     </div>
