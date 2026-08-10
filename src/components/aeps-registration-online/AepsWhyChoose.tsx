@@ -8,10 +8,16 @@ const REQUIREMENTS = [
 
 export default function AepsWhyChoose() {
   return (
-    <section className="w-full bg-[#F7F6FB] py-16 lg:py-20">
-      <div className="mx-auto w-full max-w-[90rem] px-6 lg:px-12">
+    <section className="relative w-full overflow-hidden bg-white py-16 lg:py-20">
+      {/* Ambient purple wash for depth */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-1/2 mx-auto h-[400px] max-w-4xl -translate-y-1/2 rounded-full bg-brand-purple-light blur-[130px] opacity-40"
+      />
+
+      <div className="relative mx-auto w-full max-w-[90rem] px-6 lg:px-12">
         {/* ── Heading ── */}
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-[#1D1233] md:text-4xl">
+        <h2 className="text-center text-3xl font-extrabold tracking-tight text-brand-purple-dark md:text-4xl">
           Why choose <span className="text-brand-purple">Ezeepay</span> for
           AEPS Service?
         </h2>
@@ -19,7 +25,7 @@ export default function AepsWhyChoose() {
         <div className="mt-12 grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Left — activation process copy */}
           <div>
-            <h3 className="text-xl font-bold text-[#1D1233]">
+            <h3 className="text-xl font-bold text-brand-purple-dark">
               Activation Process
             </h3>
 
@@ -31,7 +37,7 @@ export default function AepsWhyChoose() {
               handsome income on every transaction!
             </p>
 
-            <h4 className="mt-7 font-bold text-[#1D1233]">
+            <h4 className="mt-7 font-bold text-brand-purple-dark">
               Things required to start AEPS Business?
             </h4>
 
@@ -42,7 +48,7 @@ export default function AepsWhyChoose() {
                     size={19}
                     className="shrink-0 text-brand-orange"
                   />
-                  <span className="text-sm font-medium text-[#1D1233]">
+                  <span className="text-sm font-medium text-brand-purple-dark">
                     {r}
                   </span>
                 </li>

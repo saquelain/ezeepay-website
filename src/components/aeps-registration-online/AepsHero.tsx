@@ -7,7 +7,7 @@ const PLAY_STORE_URL =
 
 export default function AepsHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-white">
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#EDE7F8] via-[#F3EEFA] to-white">
       {/* Right wave background */}
       <div
         className="pointer-events-none absolute bottom-0 right-0 top-0 w-[40%] md:w-[32%]"
@@ -49,7 +49,7 @@ export default function AepsHero() {
         <div className="mt-6 grid grid-cols-1 items-center gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-8">
           {/* ── Left — copy ── */}
           <div>
-            <h1 className="text-4xl font-extrabold leading-[1.15] tracking-tight text-[#1D1233] md:text-5xl">
+            <h1 className="text-4xl font-extrabold leading-[1.15] tracking-tight text-brand-purple-dark md:text-5xl">
               AePS Registration
               <br />
               <span className="relative inline-block text-brand-orange">
@@ -70,7 +70,7 @@ export default function AepsHero() {
               </span>
             </h1>
 
-            <h2 className="mt-8 max-w-lg text-xl font-bold leading-snug text-[#1D1233]">
+            <h2 className="mt-8 max-w-lg text-xl font-bold leading-snug text-brand-purple-dark">
               Become an AEPS agent with Ezeepay and offer banking services to
               your customers through your retail shop
             </h2>

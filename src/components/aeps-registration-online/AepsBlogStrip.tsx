@@ -22,9 +22,9 @@ const POSTS = [
 
 export default function AepsBlogStrip() {
   return (
-    <section className="w-full bg-[#EFEBFA] py-14 lg:py-16">
+    <section className="w-full bg-brand-purple-light/50 py-14 lg:py-16">
       <div className="mx-auto w-full max-w-[90rem] px-6 lg:px-12">
-        <h2 className="text-center text-3xl font-extrabold tracking-tight text-[#1D1233]">
+        <h2 className="text-center text-3xl font-extrabold tracking-tight text-brand-purple-dark">
           Blog
         </h2>
 
@@ -33,7 +33,7 @@ export default function AepsBlogStrip() {
             <Link
               key={p.title}
               href={p.href}
-              className="group flex items-center gap-5 rounded-2xl bg-white p-4 shadow-sm transition-shadow hover:shadow-md"
+              className="group flex items-center gap-5 rounded-2xl bg-white p-4 shadow-sm ring-1 ring-brand-purple/10 transition-shadow hover:shadow-md"
             >
               <div className="relative h-24 w-28 shrink-0 overflow-hidden rounded-xl">
                 <Image
@@ -46,7 +46,7 @@ export default function AepsBlogStrip() {
               </div>
 
               <div>
-                <h3 className="text-sm font-bold leading-snug text-[#1D1233]">
+                <h3 className="text-sm font-bold leading-snug text-brand-purple-dark">
                   {p.title}
                 </h3>
                 <span className="mt-2 inline-block text-xs font-semibold text-brand-orange">
