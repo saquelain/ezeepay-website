@@ -55,13 +55,13 @@ export default function FounderNote() {
             </div>
 
             {/* Avatar in a dashed "photo corner" frame */}
-            <div className="flex-shrink-0 rounded-2xl border-2 border-dashed border-brand-purple/25 p-1.5">
-              <div className="relative h-16 w-16 overflow-hidden rounded-xl bg-brand-purple-light md:h-20 md:w-20">
+            <div className="flex-shrink-0 rounded-2xl border-2 border-dashed border-brand-purple/25 p-2 md:p-2.5">
+              <div className="relative h-24 w-24 overflow-hidden rounded-xl bg-brand-purple-light md:h-32 md:w-32">
                 <Image
                   src="/images/about/founder.webp"
                   alt="Shams Tabrez, founder of Ezeepay"
                   fill
-                  sizes="80px"
+                  sizes="128px"
                   className="object-cover"
                 />
               </div>
