@@ -30,7 +30,7 @@ const IMPACT_CARDS: {
   {
     icon: MapPin,
     label: ["PIN codes", "served"],
-    value: "10,000+",
+    value: "15,000+",
     desc: "From metro lanes to remote villages — we're already there.",
   },
   {
