@@ -13,6 +13,9 @@ import MobileMenu from "@/components/layout/MobileMenu";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useClickSound } from "@/hooks/useClickSound";
 
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.EzeePay_DigitalBharat&pli=1";
+
 export default function Navbar() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -85,8 +88,10 @@ export default function Navbar() {
               label="Partner Login"
               onClick={playClick}
             />
-            <Link
-              href="/download"
+            <a
+              href={PLAY_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={playClick}
               className="inline-flex items-center justify-center whitespace-nowrap
                          rounded-full bg-gradient-to-b from-[#FF9142] to-brand-orange px-5 py-[17px]
@@ -97,7 +102,7 @@ export default function Navbar() {
                          active:translate-y-0 active:scale-100"
             >
               Download App
-            </Link>
+            </a>
           </div>
 
           {/* Hamburger (mobile) */}
