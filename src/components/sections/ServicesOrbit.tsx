@@ -171,20 +171,23 @@ export default function ServicesOrbit() {
             className="group absolute left-0 top-0 z-0 -ml-8 -mt-8 block hover:z-40 focus-visible:z-40 md:-ml-9 md:-mt-9"
             style={{ willChange: "transform" }}
           >
-            {/* Inner bubble carries the hover visuals (outer is GSAP-scaled) */}
-            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-lg shadow-brand-purple/15 ring-1 ring-black/5 transition-all duration-300 group-hover:bg-brand-purple group-hover:shadow-xl group-hover:shadow-brand-purple/30 group-hover:ring-brand-purple/30 md:h-[4.5rem] md:w-[4.5rem]">
+            {/* Inner bubble carries the hover visuals (outer is GSAP-scaled).
+                Background stays white on hover (instead of flipping to solid
+                purple) so full-color icon illustrations keep their colors
+                instead of being flattened by an invert filter. */}
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-lg shadow-brand-purple/15 ring-1 ring-black/5 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-brand-purple/30 group-hover:ring-2 group-hover:ring-brand-purple/40 md:h-[4.5rem] md:w-[4.5rem]">
             {iconSrc ? (
             <Image
                 src={iconSrc}
                 alt=""
                 width={38}
                 height={38}
-                className="h-[38px] w-[38px] object-contain transition-all duration-300 group-hover:brightness-0 group-hover:invert md:h-11 md:w-11"
+                className="h-[38px] w-[38px] object-contain transition-transform duration-300 group-hover:scale-110 md:h-11 md:w-11"
             />
             ) : Icon ? (
             <Icon
                 size={30}
-                className="text-brand-purple transition-colors duration-300 group-hover:text-white"
+                className="text-brand-purple"
             />
             ) : null}
             </span>

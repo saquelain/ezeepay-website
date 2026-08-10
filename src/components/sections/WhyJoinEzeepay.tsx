@@ -1,12 +1,8 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ShieldCheck } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const BENEFITS: { number: string; image: string; title: string; desc: string; iconScale?: number }[] = [
     { number: "01", image: "/images/why-join/onboarding.png", title: "Instant & Easy Onboarding", desc: "Paperless onboarding in minutes.", iconScale: 1.35 },
@@ -33,45 +29,40 @@ const FEATURED_BENEFIT = {
 
 export default function WhyJoinEzeepay() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
 
-  useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
+  useEffect(() => {
+    // Respect reduced-motion preference — skip straight to visible.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInView(true);
+      return;
+    }
 
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.from(".wje-header > *", {
-          y: 24,
-          opacity: 0,
-          stagger: 0.08,
-          duration: 0.7,
-          ease: "power3.out",
-          scrollTrigger: { trigger: sectionRef.current, start: "top 75%" },
-        });
+    const el = sectionRef.current;
+    if (!el) return;
 
-        gsap.utils.toArray<HTMLElement>(".wje-card").forEach((card, i) => {
-          gsap.from(card, {
-            y: 28,
-            opacity: 0,
-            duration: 0.55,
-            ease: "power3.out",
-            delay: (i % 4) * 0.06,
-            scrollTrigger: { trigger: card, start: "top 92%" },
-          });
-        });
+    // If the section is already on screen at mount (e.g. page loaded
+    // mid-scroll, or scroll position restored on refresh), show it
+    // immediately instead of waiting on an observer callback that may
+    // never fire because it's already "in view" with nothing to cross.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      setInView(true);
+      return;
+    }
 
-        gsap.from(".wje-banner", {
-          y: 20,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".wje-banner", start: "top 92%" },
-        });
-      }, sectionRef);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -10% 0px" }
+    );
 
-      return () => ctx.revert();
-    });
-
-    return () => mm.revert();
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -90,27 +81,42 @@ export default function WhyJoinEzeepay() {
 
       <div className="relative mx-auto max-w-[1440px]">
         {/* Header */}
-        <div className="wje-header mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple shadow-sm">
+        <div className="mx-auto max-w-2xl text-center">
+          <span
+            className={`inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple shadow-sm transition-all duration-700 ease-out ${
+              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+          >
             Why Ezeepay
           </span>
-          <h2 className="mt-5 text-4xl font-bold leading-tight text-brand-purple-dark md:text-5xl">
+          <h2
+            className={`mt-5 text-4xl font-bold leading-tight text-brand-purple-dark transition-all delay-[80ms] duration-700 ease-out md:text-5xl ${
+              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+          >
             Why Join{" "}
             <span className="bg-gradient-to-r from-brand-orange to-brand-purple bg-clip-text text-transparent">
                 Ezeepay?
             </span>
             </h2>
-          <p className="mx-auto mt-4 text-lg leading-relaxed text-brand-grey">
+          <p
+            className={`mx-auto mt-4 text-lg leading-relaxed text-brand-grey transition-all delay-[160ms] duration-700 ease-out ${
+              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+          >
             Empowering Bharat with technology, support & unlimited opportunities.
           </p>
         </div>
 
         {/* Grid — 12 cards, compact, up to 6 columns on larger screens */}
         <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-        {BENEFITS.map((b) => (
+        {BENEFITS.map((b, i) => (
             <div
                 key={b.number}
-                className="wje-card relative rounded-xl bg-white p-3.5 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                style={{ transitionDelay: inView ? `${220 + (i % 6) * 60}ms` : "0ms" }}
+                className={`relative rounded-xl bg-white p-3.5 shadow-sm ring-1 ring-black/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg ${
+                  inView ? "translate-y-0 opacity-100" : "translate-y-7 opacity-0"
+                }`}
             >
                 <span className="absolute left-3 top-3 rounded-md bg-brand-purple-light px-2 py-0.5 text-[10px] font-bold text-brand-purple">
                 {b.number}
@@ -138,7 +144,12 @@ export default function WhyJoinEzeepay() {
           ))}
 
           {/* Card 13 — half-width, two icons (left mark + right decorative illustration) */}
-          <div className="wje-card relative col-span-full mx-auto w-full rounded-xl bg-white p-5 shadow-sm ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:w-2/3 lg:w-1/2">
+          <div
+            style={{ transitionDelay: inView ? "560ms" : "0ms" }}
+            className={`relative col-span-full mx-auto w-full rounded-xl bg-white p-5 shadow-sm ring-1 ring-black/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg sm:w-2/3 lg:w-1/2 ${
+              inView ? "translate-y-0 opacity-100" : "translate-y-7 opacity-0"
+            }`}
+          >
             <span className="absolute left-4 top-4 rounded-md bg-brand-purple-light px-2 py-0.5 text-[10px] font-bold text-brand-purple">
                 {FEATURED_BENEFIT.number}
             </span>
@@ -176,7 +187,12 @@ export default function WhyJoinEzeepay() {
         </div>
 
         {/* Bottom banner */}
-        <div className="wje-banner mx-auto mt-8 flex w-fit max-w-full flex-col items-center gap-2 rounded-full bg-brand-purple px-6 py-4 text-center shadow-lg shadow-brand-purple/25 sm:flex-row sm:gap-3 sm:text-left">
+        <div
+          style={{ transitionDelay: inView ? "640ms" : "0ms" }}
+          className={`mx-auto mt-8 flex w-fit max-w-full flex-col items-center gap-2 rounded-full bg-brand-purple px-6 py-4 text-center shadow-lg shadow-brand-purple/25 transition-all duration-500 ease-out sm:flex-row sm:gap-3 sm:text-left ${
+            inView ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
+          }`}
+        >
           <ShieldCheck size={20} className="flex-shrink-0 text-white" />
           <p className="text-sm text-white/90 sm:text-base">
             <span className="font-bold text-white">

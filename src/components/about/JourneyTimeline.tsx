@@ -53,7 +53,7 @@ const MILESTONES: Milestone[] = [
     {
       year: "2021",
       title: "Scaling New Heights with Innovation",
-      desc: "Another challenging pandemic year became a period of scaling and diversification — 300,000+ retailers, new offerings like Micro Finance and E-Governance, and a presence across 5,000 pincodes made Ezeepay a trusted name in rural India.",
+      desc: "Another challenging pandemic year became a period of scaling and diversification — 300,000+ retailers, new offerings like Micro Finance and E-Governance, and a presence across 15,000 pincodes made Ezeepay a trusted name in rural India.",
       stats: [
         { label: "Active Retailers", value: 70000 },
         { label: "Transaction Volume", value: 900, prefix: "₹", suffix: " Cr" },
@@ -93,7 +93,7 @@ const MILESTONES: Milestone[] = [
     {
       year: "2025",
       title: "Reaching Every Corner of India",
-      desc: "Ezeepay aims to cover all 19,000 pincodes across India and expand to over 1.5 million retailers — integrating AI banking features to revolutionise how banking services reach rural communities.",
+      desc: "Ezeepay aims to cover all 20,000 pincodes across India and expand to over 1.5 million retailers — integrating AI banking features to revolutionise how banking services reach rural communities.",
       stats: [{ label: "Expected Transaction Volume", value: 7500, prefix: "₹", suffix: " Cr" }],
       image: "/images/journey/2025-reaching.png",
       projected: true,

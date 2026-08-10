@@ -1,14 +1,10 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScanLine, Landmark, ArrowRight, LayoutGrid } from "lucide-react";
+import { ArrowRight, LayoutGrid } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const SERVICES: {
   icon?: LucideIcon;      // fallback Lucide icon (only for items with no custom SVG yet)
@@ -93,51 +89,39 @@ const SERVICES: {
 
 export default function ServicesShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
 
-  useLayoutEffect(() => {
-    const mm = gsap.matchMedia();
+  useEffect(() => {
+    // Respect reduced-motion preference — skip straight to visible.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInView(true);
+      return;
+    }
 
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.fromTo(
-          ".svc-header > *",
-          { y: 24, autoAlpha: 0 },
-          {
-            y: 0,
-            autoAlpha: 1,
-            stagger: 0.08,
-            duration: 0.7,
-            ease: "power3.out",
-            immediateRender: false,
-            clearProps: "all",
-            scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
-          }
-        );
+    const el = sectionRef.current;
+    if (!el) return;
 
-        /* Fail-safe per-card entrance */
-        gsap.utils.toArray<HTMLElement>(".svc-card").forEach((card, i) => {
-          gsap.fromTo(
-            card,
-            { y: 32, autoAlpha: 0, scale: 0.97 },
-            {
-              y: 0,
-              autoAlpha: 1,
-              scale: 1,
-              duration: 0.6,
-              ease: "power3.out",
-              delay: (i % 4) * 0.07,
-              immediateRender: false,
-              clearProps: "all",
-              scrollTrigger: { trigger: card, start: "top 90%", once: true },
-            }
-          );
-        });
-      }, sectionRef);
+    // If the section is already on screen at mount (page loaded mid-scroll,
+    // or scroll position restored on refresh), show it immediately instead
+    // of waiting on an observer crossing that may never fire.
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      setInView(true);
+      return;
+    }
 
-      return () => ctx.revert();
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -10% 0px" }
+    );
 
-    return () => mm.revert();
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -150,16 +134,28 @@ export default function ServicesShowcase() {
 
       <div className="relative mx-auto max-w-7xl">
         {/* ── Header ── */}
-        <div className="svc-header mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-brand-purple-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
+        <div className="mx-auto max-w-2xl text-center">
+          <span
+            className={`inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-brand-purple-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple transition-all duration-700 ease-out ${
+              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+          >
             <LayoutGrid size={13} />
             60+ Services
           </span>
-          <h2 className="mt-5 text-4xl font-bold leading-tight text-brand-purple-dark md:text-5xl">
+          <h2
+            className={`mt-5 text-4xl font-bold leading-tight text-brand-purple-dark transition-all delay-[80ms] duration-700 ease-out md:text-5xl ${
+              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+          >
             One App for{" "}
             <span className="text-brand-purple">Multiple Services</span>
           </h2>
-          <p className="mx-auto mt-4 text-lg leading-relaxed text-brand-grey">
+          <p
+            className={`mx-auto mt-4 text-lg leading-relaxed text-brand-grey transition-all delay-[160ms] duration-700 ease-out ${
+              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+            }`}
+          >
             Banking, payments, insurance, and more — sab kuch ek app mein, full
             commission ke saath.
           </p>
@@ -167,11 +163,14 @@ export default function ServicesShowcase() {
 
         {/* ── Services grid ── */}
         <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {SERVICES.map(({ icon: Icon, iconSrc, title, desc, href }) => (
+          {SERVICES.map(({ icon: Icon, iconSrc, title, desc, href }, i) => (
             <Link
               key={title}
               href={href}
-              className="svc-card group relative overflow-hidden rounded-2xl bg-white p-6 ring-1 ring-black/5 shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-brand-purple/10 hover:ring-brand-purple/20"
+              style={{ transitionDelay: inView ? `${220 + (i % 4) * 70}ms` : "0ms" }}
+              className={`group relative overflow-hidden rounded-2xl bg-white p-6 ring-1 ring-black/5 shadow-sm transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-xl hover:shadow-brand-purple/10 hover:ring-brand-purple/20 ${
+                inView ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-[0.97] opacity-0"
+              }`}
             >
               {/* Top accent line grows on hover */}
               <span
