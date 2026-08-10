@@ -44,6 +44,35 @@ const ITEM_ICONS: Record<string, LucideIcon> = {
   investment: TrendingUp,
 };
 
+// ── Flat legacy URLs (no /services prefix, no nesting) ──
+// Category slug → top-level page path.
+const CATEGORY_HREF: Record<string, string> = {
+  banking: "/banking-service",
+  utility: "/utility-bill-payment",
+  insurance: "/insurance",
+  travel: "/travel-services",
+  "e-governance": "/egovernment-Services",
+  "account-opening": "/neo-banking",
+};
+
+// Item slug → its own dedicated page path. Only Banking Services items have
+// unique pages on the legacy site — everything else links back to its
+// category page (they're anchor sections there), so items not listed here
+// fall back to CATEGORY_HREF automatically.
+const ITEM_HREF: Record<string, string> = {
+  aeps: "/aeps-registration-online",
+  "money-transfer": "/money-transfer-business",
+  "micro-atm": "/micro-atm",
+};
+
+function categoryHref(categorySlug: string) {
+  return CATEGORY_HREF[categorySlug] ?? `/${categorySlug}`;
+}
+
+function itemHref(categorySlug: string, itemSlug: string) {
+  return ITEM_HREF[itemSlug] ?? categoryHref(categorySlug);
+}
+
 export default function ServicesMegaMenu({
   onLinkClick,
 }: {
@@ -96,7 +125,7 @@ export default function ServicesMegaMenu({
         return (
           <div key={category.slug}>
             <Link
-              href={`/services/${category.slug}`}
+              href={categoryHref(category.slug)}
               onClick={onLinkClick}
               className="group/cat mb-4 flex items-center gap-3"
             >
@@ -117,7 +146,7 @@ export default function ServicesMegaMenu({
                 return (
                   <li key={item.slug}>
                     <Link
-                      href={`/services/${category.slug}/${item.slug}`}
+                      href={itemHref(category.slug, item.slug)}
                       onClick={onLinkClick}
                       className="group/item flex items-center gap-2 text-[15px] text-brand-grey
                                  transition-colors hover:text-brand-purple"
