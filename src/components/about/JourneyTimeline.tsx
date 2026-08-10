@@ -101,7 +101,7 @@ const MILESTONES: Milestone[] = [
     {
       year: "2026",
       title: "Advancing with Technology and Innovation",
-      desc: "A major technological leap — advanced technologies and upgraded services for greater operational efficiency, with a retailer base exceeding 3 million delivering smarter, faster financial solutions nationwide.",
+      desc: "A major technological leap — the launch of UPI Cashpoint, Screen Protection, and CASA account services, alongside advanced technologies and upgraded operational efficiency, with a retailer base exceeding 3 million delivering smarter, faster financial solutions nationwide.",
       stats: [{ label: "Expected Transaction Volume", value: 10000, prefix: "₹", suffix: " Cr" }],
       image: "/images/journey/2026-advancing.png",
       projected: true,
