@@ -366,7 +366,7 @@ export default function WhyEzeepay() {
             className="bento-card card-glow rounded-3xl bg-gradient-to-b from-white to-[#F3EEFA] p-6 ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-xl hover:shadow-brand-purple/10"
           >
             <h3 className="text-center text-xl font-bold text-brand-purple-dark">
-              <span className="count-up" data-target="500000">0</span>+ Agents
+              <span className="count-up" data-target="1000000">0</span>+ Agents
               Across India
             </h3>
 

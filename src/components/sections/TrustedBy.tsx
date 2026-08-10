@@ -21,7 +21,18 @@ const DARK_CHIP_LOGOS = new Set<string>([
   "inrdeals.png"
 ]);
 
-function getPartnerLogos() {
+// Row scroll speed (seconds per full loop). Lower = faster.
+const ROW_DURATION_SECONDS = 28;
+
+type Partner = {
+  name: string;
+  src: string;
+  width: number;
+  height: number;
+  needsDarkChip: boolean;
+};
+
+function getPartnerLogos(): Partner[] {
   const dir = path.join(process.cwd(), "public", "logos", "partners");
 
   let files: string[] = [];
@@ -71,10 +82,75 @@ function getPartnerLogos() {
     });
 }
 
+// Split into two roughly-equal, non-overlapping sets by alternating logos
+// between rows (keeps each row's total width balanced rather than just
+// slicing the array in half).
+function splitIntoRows(partners: Partner[]): [Partner[], Partner[]] {
+  const rowA: Partner[] = [];
+  const rowB: Partner[] = [];
+  partners.forEach((partner, i) => {
+    (i % 2 === 0 ? rowA : rowB).push(partner);
+  });
+  return [rowA, rowB];
+}
+
+function LogoItem({ partner }: { partner: Partner }) {
+  if (partner.needsDarkChip) {
+    return (
+      <div className="flex flex-shrink-0 items-center rounded-lg bg-[#120B22] px-4 py-2 opacity-70 transition-all duration-300 hover:opacity-100">
+        <div className="relative" style={{ height: partner.height, width: partner.width }}>
+          <Image src={partner.src} alt={partner.name} fill className="object-contain" />
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      style={{ height: LOGO_HEIGHT, width: partner.width }}
+      className="relative flex flex-shrink-0 items-center transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+    >
+      <div className="relative w-full" style={{ height: partner.height }}>
+        <Image src={partner.src} alt={partner.name} fill className="object-contain" />
+      </div>
+    </div>
+  );
+}
+
+function MarqueeRow({
+  partners,
+  direction,
+}: {
+  partners: Partner[];
+  direction: "left" | "right";
+}) {
+  if (partners.length === 0) return null;
+
+  return (
+    <div className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
+
+      <div
+        className={`flex w-max items-center gap-16 ${
+          direction === "left" ? "animate-marquee" : "animate-marquee-reverse"
+        }`}
+        style={{ animationDuration: `${ROW_DURATION_SECONDS}s` }}
+      >
+        {[...partners, ...partners].map((partner, i) => (
+          <LogoItem key={`${partner.name}-${i}`} partner={partner} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function TrustedBy() {
   const partners = getPartnerLogos();
 
   if (partners.length === 0) return null;
+
+  const [rowA, rowB] = splitIntoRows(partners);
 
   return (
     <section className="relative bg-white px-6 py-16 mb-0">
@@ -87,54 +163,10 @@ export default function TrustedBy() {
           </span>
         </div>
 
-        {/* Marquee logo row */}
-        <div className="relative mt-12 overflow-hidden">
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-white to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-white to-transparent" />
-
-          <div
-            className="animate-marquee flex w-max items-center gap-16"
-            style={{ animationDuration: "300s" }}
-          >
-            {[...partners, ...partners].map((partner, i) =>
-              partner.needsDarkChip ? (
-                <div
-                  key={`${partner.name}-${i}`}
-                  className="flex flex-shrink-0 items-center rounded-lg bg-[#120B22] px-4 py-2 opacity-70 transition-all duration-300 hover:opacity-100"
-                >
-                  <div
-                    className="relative"
-                    style={{ height: partner.height, width: partner.width }}
-                  >
-                    <Image
-                      src={partner.src}
-                      alt={partner.name}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              ) : (
-                <div
-                  key={`${partner.name}-${i}`}
-                  style={{ height: LOGO_HEIGHT, width: partner.width }}
-                  className="relative flex flex-shrink-0 items-center transition-all duration-300 hover:grayscale-0 hover:opacity-100"
-                >
-                  <div
-                    className="relative w-full"
-                    style={{ height: partner.height }}
-                  >
-                    <Image
-                      src={partner.src}
-                      alt={partner.name}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-              )
-            )}
-          </div>
+        {/* Two independent marquee rows, different logos, opposite directions */}
+        <div className="mt-12 flex flex-col gap-8">
+          <MarqueeRow partners={rowA} direction="left" />
+          <MarqueeRow partners={rowB} direction="right" />
         </div>
       </div>
     </section>

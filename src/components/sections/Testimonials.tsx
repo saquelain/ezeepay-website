@@ -87,7 +87,7 @@ export default function Testimonials() {
                 <span className="h-4 w-px bg-black/10" />
                 <span className="flex items-center gap-2">
                 <Users size={18} className="text-brand-purple" />
-                5,00,000+ Agent Community
+                10,00,000+ Agent Community
                 </span>
             </div>
             </div>

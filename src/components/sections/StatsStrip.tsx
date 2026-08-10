@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const STATS = [
-  { value: 100, suffix: "+", label: "District Franchises" },
+  { value: 15000, suffix: "+", label: "Villages Reached" },
   { value: 2490, suffix: "+", label: "Super Distributors" },
   { value: 8382, suffix: "+", label: "Distributors" },
   { value: 400000, suffix: "+", label: "Merchant Outlets" },

@@ -9,7 +9,7 @@ import MascotBuddy from "./MascotBuddy";
 const ASSURANCES = [
   "Bank-grade security on every transaction",
   "12x7 help desk, in your language",
-  "Trusted by 5 Lakhs+ retailers across India",
+  "Trusted by 10 Lakhs+ retailers across India",
   "RBI-regulated lending partners",
 ];
 

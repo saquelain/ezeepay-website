@@ -64,20 +64,8 @@ export default function Footer() {
               <span className="font-semibold text-[#C4B5FD]">भारत</span>
             </p>
 
-            {/* Stacked CTAs — equal width (sized by the wider label) */}
+            {/* CTA — Lodge a Complaint only */}
             <div className="mt-8 inline-flex flex-col items-stretch gap-3">
-            <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-b from-[#FF9142] to-brand-orange px-8 py-4 text-[16px] font-medium leading-none text-white shadow-lg shadow-brand-orange/30 transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-xl hover:shadow-brand-orange/40"
-            >
-                Contact Us
-            </Link>
-            <Link
-                href="https://login.ezeepay.app"
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-full bg-white px-8 py-4 text-[16px] font-medium leading-none text-brand-purple-dark shadow-md shadow-black/20 transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 hover:shadow-lg"
-            >
-                Partner Login
-            </Link>
             <Link
                 href="/lodge-complaint"
                 className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full border border-white/20 px-8 py-4 text-[16px] font-medium leading-none text-white/85 transition-all duration-300 hover:border-white/40 hover:bg-white/5"

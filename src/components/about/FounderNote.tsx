@@ -90,7 +90,7 @@ export default function FounderNote() {
               As a rural fintech company, EzeePay Digital Bharat has aimed to
               make banking easier and more convenient in rural areas of India.
               Following that, we&apos;ve expanded our retail base and channel
-              partners — growing from 5,000 to 5,00,000 retail outlets, with
+              partners — growing from 5,000 to 10,00,000 retail outlets, with
               plans to triple that headcount in the years ahead.
             </p>
 

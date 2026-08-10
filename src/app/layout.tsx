@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ezeepay — Banking For The New Digital Bharat | AEPS, Money Transfer & 60+ Services",
   description:
-    "Join 5,00,000+ Ezeepay agents earning with AEPS, money transfer, bill payments, recharge, travel booking and 60+ services. Minimum investment, zero working capital.",
+    "Join 10,00,000+ Ezeepay agents earning with AEPS, money transfer, bill payments, recharge, travel booking and 60+ services. Minimum investment, zero working capital.",
 };
 
 export default function RootLayout({

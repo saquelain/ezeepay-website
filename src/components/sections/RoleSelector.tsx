@@ -12,7 +12,7 @@ const ROLES = [
     tabBold: "Agent",
     headline: "Turn Your Shop Into A Mini Bank",
     body: "Kirana, medical, apparel, mobile recharge, hardware, restaurant, tailoring, insurance, or travel — any shop can offer 60+ services. No working capital needed.",
-    earnings: "Earn ₹25,000+ per month. Join 5,00,000+ retailers.",
+    earnings: "Earn ₹25,000+ per month. Join 10,00,000+ retailers.",
     image: "/images/roles/agent.png",
     ctas: [
       { label: "Apply Online", href: "/apply", primary: true },
@@ -39,16 +39,6 @@ const ROLES = [
     image: "/images/roles/master-distributor.png",
     ctas: [{ label: "Apply Online", href: "/apply", primary: true }],
   },
-  {
-    id: "district-franchise",
-    tabTop: "Lead Your District",
-    tabBold: "District Franchise",
-    headline: "Own Your District's Digital Future",
-    body: "Run the Ezeepay franchise for your district — fully digital, no godown, no staff. Use your network to earn 25% commission on total investment.",
-    earnings: "Earn ₹2,00,000+ per month.",
-    image: "/images/roles/district-franchise.png",
-    ctas: [{ label: "Apply Online", href: "/apply", primary: true }],
-  },
 ];
 
 export default function RoleSelector() {
@@ -73,13 +63,13 @@ export default function RoleSelector() {
             <span className="text-brand-purple">Earn, Grow & Lead</span>
           </h2>
           <p className="mx-auto mt-6 max-w-xl text-lg text-brand-grey">
-            Whether you run a kirana shop or manage a district-wide network —
-            there&apos;s an Ezeepay role that fits your ambition.
+            Whether you run a kirana shop or manage a growing distribution
+            network — there&apos;s an Ezeepay role that fits your ambition.
           </p>
         </div>
 
         {/* Tabs */}
-        <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4">
+        <div className="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3">
         {ROLES.map((r, i) => {
             const isActive = active === i;
             return (

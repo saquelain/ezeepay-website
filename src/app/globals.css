@@ -155,3 +155,11 @@ body {
     animation: none !important;
   }
 }
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.animate-marquee-reverse {
+  animation: marquee-reverse linear infinite;
+}

@@ -18,7 +18,7 @@ const IMPACT_CARDS: {
   {
     icon: Store,
     label: ["No of", "retailers"],
-    value: "5 Lakhs+",
+    value: "10 Lakhs+",
     desc: "Retail partners serving their communities on Ezeepay across India.",
   },
   {

@@ -18,7 +18,7 @@ const FAQS = [
   },
   {
     q: "How much can I earn as an agent?",
-    a: "Agents typically earn ₹25,000+ per month, with commission on every single transaction. Distributors and District Franchises can earn significantly more as their network grows.",
+    a: "Agents typically earn ₹25,000+ per month, with commission on every single transaction. Distributors can earn significantly more as their network grows.",
   },
   {
     q: "Is any working capital required?",

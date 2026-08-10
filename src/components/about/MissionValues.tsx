@@ -8,7 +8,7 @@ const VALUES = [
   },
   {
     icon: TrendingUp,
-    text: "Growth for everyone: from a single kirana shop to a district franchise, we believe the same platform should scale with your ambition.",
+    text: "Growth for everyone: from a single kirana shop to a full-fledged distribution business, we believe the same platform should scale with your ambition.",
   },
   {
     icon: Rocket,
