@@ -6,7 +6,7 @@ const PLAY_STORE_URL =
 
 export default function BankingFinalCta() {
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-br from-[#4038A8] via-[#3D2F96] to-[#37277F] py-12 lg:py-14">
+    <section className="relative w-full overflow-hidden bg-gradient-to-br from-brand-purple via-brand-purple-dark to-[#120B22] py-12 lg:py-14">
       {/* Decorative corner waves */}
         <div className="pointer-events-none absolute inset-0" aria-hidden>
         {/* Left wave — portrait, hugs the left edge */}

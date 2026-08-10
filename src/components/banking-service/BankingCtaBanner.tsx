@@ -17,11 +17,18 @@ const STATS = [
 
 export default function BankingCtaBanner() {
   return (
-    <section className="relative w-full bg-[#F7F6FB] pb-20">
+    <section className="relative w-full bg-[#F7F5FB] pb-20">
       <div className="mx-auto w-full max-w-[100rem] px-6 lg:px-8">
-        {/* ── Purple CTA banner ── */}
-        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#4A2E8C] via-[#3D2578] to-[#2C1A5C] px-6 py-10 md:px-12 md:py-4">
-          <div className="grid grid-cols-1 items-center gap-10 md:grid-cols-[300px_200px_1fr] md:gap-12">
+        {/* ── Purple CTA banner — gradient tied to the Footer's dark tone
+             (#120B22) so it reads as the same brand, not a random purple ── */}
+        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-purple via-brand-purple-dark to-[#120B22] px-6 py-10 md:px-12 md:py-4">
+          {/* Subtle glow accent, echoes the corner-blob device used elsewhere */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-24 right-0 h-72 w-72 rounded-full bg-brand-orange/20 blur-[100px]"
+          />
+
+          <div className="relative grid grid-cols-1 items-center gap-10 md:grid-cols-[300px_200px_1fr] md:gap-12">
             {/* Phone image — anchored to bottom-left, bleeding off the banner */}
             <div className="relative mx-auto h-72 w-56 md:-mb-16 md:-ml-4 md:h-[440px] md:w-full md:self-end">
             <Image
@@ -69,14 +76,14 @@ export default function BankingCtaBanner() {
                 onSubmit={(e) => e.preventDefault()}
                 className="mt-6 flex max-w-lg items-center overflow-hidden rounded-full bg-white p-1.5 shadow-lg"
               >
-                <span className="flex shrink-0 items-center gap-1.5 border-r border-black/10 px-4 text-sm font-medium text-[#1D1233]">
+                <span className="flex shrink-0 items-center gap-1.5 border-r border-black/10 px-4 text-sm font-medium text-brand-purple-dark">
                   🇮🇳 +91
                 </span>
                 <input
                   type="tel"
                   inputMode="numeric"
                   placeholder="Enter your mobile number"
-                  className="w-full bg-transparent px-4 py-2.5 text-sm text-[#1D1233] outline-none placeholder:text-brand-grey"
+                  className="w-full bg-transparent px-4 py-2.5 text-sm text-brand-purple-dark outline-none placeholder:text-brand-grey"
                 />
                 <button
                   type="submit"
@@ -122,7 +129,7 @@ export default function BankingCtaBanner() {
         </div>
 
         {/* ── Stats bar ── */}
-        <div className="mt-8 grid grid-cols-2 gap-6 rounded-[2rem] border border-black/5 bg-white px-6 py-8 shadow-sm md:grid-cols-4 md:divide-x md:divide-black/10 md:px-10">
+        <div className="mt-8 grid grid-cols-2 gap-6 rounded-[2rem] bg-white px-6 py-8 shadow-sm ring-1 ring-brand-purple/10 md:grid-cols-4 md:divide-x md:divide-brand-purple/10 md:px-10">
           {STATS.map((s) => {
             const Icon = s.icon;
             return (
@@ -130,11 +137,11 @@ export default function BankingCtaBanner() {
                 key={s.label}
                 className="flex items-center gap-4 md:justify-center"
               >
-                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#F4F2FA] text-brand-purple">
+                <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-purple-light text-brand-purple">
                   <Icon size={24} />
                 </span>
                 <div>
-                  <p className="text-2xl font-extrabold text-[#1D1233]">
+                  <p className="text-2xl font-extrabold text-brand-purple-dark">
                     {s.value}
                   </p>
                   <p className="mt-0.5 text-sm text-brand-grey">{s.label}</p>

@@ -13,7 +13,7 @@ const HIGHLIGHTS = [
 
 export default function BankingServiceHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-purple-50">
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#EDE7F8] via-[#F3EEFA] to-white">
       {/* Corner blob artwork — transparent PNG, top-right as-is, bottom-left rotated 180° */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
         <div className="absolute right-0 top-0 h-[55%] w-[45%] md:h-[65%] md:w-[38%]">
@@ -58,7 +58,7 @@ export default function BankingServiceHero() {
               Ezeepay Banking Services
             </p>
 
-            <h1 className="mt-4 text-5xl font-extrabold leading-[1.1] tracking-tight text-[#1D1233] md:text-6xl xl:text-[4.5rem]">
+            <h1 className="mt-4 text-5xl font-extrabold leading-[1.1] tracking-tight text-brand-purple-dark md:text-6xl xl:text-[4.5rem]">
               Banking Services,
               <br />
               Built for{" "}
@@ -93,10 +93,12 @@ export default function BankingServiceHero() {
                 return (
                   <div
                     key={h.label}
-                    className="flex items-center gap-3 rounded-2xl border border-black/5 bg-white px-5 py-5 shadow-sm"
+                    className="flex items-center gap-3 rounded-2xl border border-brand-purple/10 bg-white/80 px-5 py-5 shadow-sm backdrop-blur-sm"
                   >
-                    <Icon size={24} className="shrink-0 text-brand-purple" />
-                    <span className="text-[15px] font-semibold leading-snug text-[#1D1233]">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-purple-light text-brand-purple">
+                      <Icon size={20} />
+                    </span>
+                    <span className="text-[15px] font-semibold leading-snug text-brand-purple-dark">
                       {h.label}
                     </span>
                   </div>

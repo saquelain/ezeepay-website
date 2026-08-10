@@ -54,15 +54,22 @@ const SERVICES = [
 
 export default function BankingServicesList() {
   return (
-    <section className="relative w-full bg-[#F7F6FB] py-20 lg:py-24">
-      <div className="mx-auto w-full max-w-[90rem] px-6 lg:px-12">
+    <section className="relative w-full overflow-hidden bg-[#F7F5FB] py-20 lg:py-24">
+      {/* Ambient purple wash — same device other sections on the site use
+          for depth, instead of a flat solid background */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-[420px] max-w-4xl rounded-full bg-brand-purple-light blur-[130px] opacity-50"
+      />
+
+      <div className="relative mx-auto w-full max-w-[90rem] px-6 lg:px-12">
         {/* ── Section heading ── */}
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center rounded-full border border-brand-purple/15 bg-white px-5 py-2 text-sm font-medium text-brand-purple shadow-sm">
             All-in-One Banking Solutions
           </span>
 
-          <h2 className="mt-6 text-4xl font-extrabold leading-[1.15] tracking-tight text-[#1D1233] md:text-5xl">
+          <h2 className="mt-6 text-4xl font-extrabold leading-[1.15] tracking-tight text-brand-purple-dark md:text-5xl">
             Every Service You Need,
             <br />
             All in{" "}
@@ -91,14 +98,14 @@ export default function BankingServicesList() {
         </div>
 
         {/* ── Service cards ── */}
-        <div className="mt-14 space-y-8">
+        <div className="relative mt-14 space-y-8">
           {SERVICES.map((s) => (
             <div
               key={s.title}
-              className="grid grid-cols-1 overflow-hidden rounded-3xl border border-black/5 bg-white shadow-sm transition-shadow hover:shadow-md md:grid-cols-[280px_1fr_auto]"
+              className="grid grid-cols-1 overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-brand-purple/10 transition-shadow hover:shadow-lg hover:shadow-brand-purple/10 md:grid-cols-[280px_1fr_auto]"
             >
               {/* Image */}
-              <div className="relative flex items-center justify-center bg-[#F4F2FA] p-6">
+              <div className="relative flex items-center justify-center bg-gradient-to-br from-brand-purple-light to-[#EDE7F8] p-6">
                 <div className="relative h-52 w-full md:h-full md:min-h-[220px]">
                   <Image
                     src={s.image}
@@ -125,7 +132,7 @@ export default function BankingServicesList() {
                     return (
                       <span
                         key={t.label}
-                        className="inline-flex items-center gap-2 rounded-xl bg-[#F4F2FA] px-4 py-2.5 text-sm font-medium text-brand-purple-dark"
+                        className="inline-flex items-center gap-2 rounded-xl bg-brand-purple-light px-4 py-2.5 text-sm font-medium text-brand-purple-dark"
                       >
                         <Icon size={16} className="text-brand-purple" />
                         {t.label}
