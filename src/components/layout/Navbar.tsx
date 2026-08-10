@@ -22,6 +22,14 @@ export default function Navbar() {
   const hidden = useScrollDirection();
   const playClick = useClickSound();
 
+  // Used inside the mega menus specifically — plays the click sound AND
+  // closes whichever mega menu is open, since clicking through to a page
+  // should never leave the dropdown hanging open underneath it.
+  const handleMegaMenuLinkClick = () => {
+    playClick();
+    setOpenMenu(null);
+  };
+
   if (hidden && openMenu) setOpenMenu(null);
 
   return (
@@ -116,8 +124,8 @@ export default function Navbar() {
         </nav>
 
         {/* Mega menus (desktop) */}
-        {openMenu === "Services" && <ServicesMegaMenu onLinkClick={playClick} />}
-        {openMenu === "Resources" && <ResourcesMegaMenu onLinkClick={playClick} />}
+        {openMenu === "Services" && <ServicesMegaMenu onLinkClick={handleMegaMenuLinkClick} />}
+        {openMenu === "Resources" && <ResourcesMegaMenu onLinkClick={handleMegaMenuLinkClick} />}
       </header>
 
       {/* Mobile menu — sibling of header so position:fixed works correctly */}
