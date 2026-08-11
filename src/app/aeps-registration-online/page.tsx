@@ -1,9 +1,9 @@
 import AepsHero from "@/components/aeps-registration-online/AepsHero";
+import AepsWhatIsAeps from "@/components/aeps-registration-online/AepsWhatIsAeps";
 import AepsVideoSection from "@/components/aeps-registration-online/AepsVideoSection";
-// import AepsBenefits from "@/components/aeps-registration-online/AepsBenefits";
 import AepsHowItWorks from "@/components/aeps-registration-online/AepsHowItWorks";
+import AepsFeatures from "@/components/aeps-registration-online/AepsFeatures";
 import AepsWhyChoose from "@/components/aeps-registration-online/AepsWhyChoose";
-import AepsBlogStrip from "@/components/aeps-registration-online/AepsBlogStrip";
 import Resources from "@/components/sections/Resources";
 
 export const metadata = {
@@ -16,12 +16,12 @@ export default function AepsRegistrationPage() {
   return (
     <main>
       <AepsHero />
-      <AepsVideoSection />
-      {/* <AepsBenefits /> */}
+      <AepsWhatIsAeps />
       <AepsHowItWorks />
+      <AepsFeatures />
+      <AepsVideoSection />
       <AepsWhyChoose />
       <Resources />
-      {/* <AepsBlogStrip /> */}
     </main>
   );
 }
