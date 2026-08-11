@@ -271,7 +271,7 @@ export default function JourneyTimeline() {
         <div className="relative z-10 mx-auto max-w-6xl px-6">
           <div className="flex items-end justify-between gap-8">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
+              <span className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
                 <Flag size={13} />
                 Our Journey
               </span>
@@ -466,7 +466,7 @@ export default function JourneyTimeline() {
             }}
         />
         <div className="relative z-10 mx-auto max-w-xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
             <Flag size={13} />
             Our Journey
           </span>
@@ -474,7 +474,7 @@ export default function JourneyTimeline() {
             From Vision to <span className="text-brand-purple">Victory</span>
           </h2>
 
-          <div className="relative mt-10 border-l-2 border-brand-purple/15 pl-8">
+          <div className="relative mt-10 border-l-2 border-border-subtle pl-8">
             {MILESTONES.map((m) => (
               <div key={m.year} className="relative pb-10 last:pb-0">
                 <span className="absolute -left-[41px] top-1 h-4 w-4 rounded-full border-4 border-white bg-brand-orange shadow" />

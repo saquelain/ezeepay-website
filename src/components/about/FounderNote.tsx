@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 /* 1px outline used for the card + notch (keep these two in sync) */
-const LINE = "rgba(91, 45, 142, 0.18)";
+const LINE = "rgba(17, 24, 39, 0.08)";
 
 export default function FounderNote() {
   return (
@@ -55,8 +55,8 @@ export default function FounderNote() {
             </div>
 
             {/* Avatar in a dashed "photo corner" frame */}
-            <div className="mt-6 flex-shrink-0 rounded-2xl border-2 border-dashed border-brand-purple/25 p-3 md:mt-10 md:p-3.5">
-              <div className="relative h-36 w-36 overflow-hidden rounded-xl bg-brand-purple-light md:h-52 md:w-52">
+            <div className="mt-6 flex-shrink-0 rounded-2xl border-2 border-dashed border-border-subtle p-3 md:mt-10 md:p-3.5">
+              <div className="relative h-36 w-36 overflow-hidden rounded-xl bg-gray-100 md:h-52 md:w-52">
                 <Image
                   src="/images/about/founder.webp"
                   alt="Shams Tabrez, founder of Ezeepay"

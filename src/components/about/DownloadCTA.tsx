@@ -73,7 +73,7 @@ export default function DownloadCTA() {
   return (
     <section
       ref={sectionRef}
-      className="relative mx-4 my-8 overflow-hidden rounded-[2.5rem] bg-gradient-to-b from-[#F3EEFA] to-white px-6 py-20 md:px-12 md:py-24"
+      className="relative mx-4 my-8 overflow-hidden rounded-[2.5rem] bg-gradient-to-b from-[#FAFAFA] to-white px-6 py-20 md:px-12 md:py-24"
     >
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2">
         {/* ── Left: copy + store buttons ── */}

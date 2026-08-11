@@ -91,7 +91,7 @@ export default function AboutHero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#EDE7F8] via-[#F3EEFA] to-white px-6 pb-24 pt-10">
+    <section className="relative overflow-hidden bg-gradient-to-b from-white via-white to-[#FAFAFA] px-6 pb-24 pt-10">
       <div className="mx-auto max-w-5xl text-center">
         {/* Badge */}
         <span className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-2.5 text-sm font-medium text-brand-purple-dark shadow-sm">
