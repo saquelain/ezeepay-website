@@ -3,59 +3,46 @@
 import { useState } from "react";
 import Image from "next/image";
 
-/**
- * Certifications & Associations strip for the footer.
- * Heading now sits above the dark card (not inside it), and the card's
- * vertical padding is tightened to hug the logos closely — logo size
- * itself (h-24 / md:h-28) is untouched.
- *
- * Logo files live at /public/images/associations/ — the `file` field below
- * must match each file's actual name + extension.
- *
- * Until a logo file exists, a clean text badge is shown automatically.
- */
-const ASSOCIATIONS = [
-  { file: "bcfi.png", name: "BCFI", full: "Business Correspondent Federation of India" },
-  { file: "iamai.png", name: "IAMAI", full: "Internet and Mobile Association of India" },
-  { file: "npci.png", name: "NPCI", full: "National Payments Corporation of India" },
-  { file: "duns.png", name: "D-U-N-S", full: "Dun & Bradstreet D-U-N-S Registered" },
+const CERTIFICATIONS = [
+  { name: "Business Correspondent Federation of India", short: "BCFI", logo: "/certifications/bcfi1.webp" },
+  { name: "D-U-N-S Registered", short: "D-U-N-S", logo: "/certifications/duns1.webp" },
+  { name: "Internet and Mobile Association of India", short: "IAMAI", logo: "/certifications/iamai1.webp" },
+  { name: "ISO 27001 Certified", short: "ISO 27001", logo: "/certifications/iso-270011.webp" },
+  { name: "ISO 9001:2015 Certified", short: "ISO 9001", logo: "/certifications/iso-90011.webp" },
 ];
 
 export default function FooterAssociations() {
   const [failed, setFailed] = useState<Record<string, boolean>>({});
 
   return (
-    <div className="mt-[-50]">
-      <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">
+    <div>
+      <p className="text-[11px] font-bold uppercase tracking-[0.09em] text-white/40">
         Certifications &amp; Associations
       </p>
 
-      <div className="mt-3 rounded-2xl bg-[#000000] px-10 py-4">
-        <div className="flex flex-wrap items-center justify-between gap-x-10 gap-y-4">
-          {ASSOCIATIONS.map((a) => (
-            <div
-              key={a.file}
-              title={a.full}
-              className="flex h-24 items-center justify-center opacity-95 transition-opacity duration-300 hover:opacity-100 md:h-28"
-            >
-              {failed[a.file] ? (
-                /* Text badge until the official logo file is added */
-                <span className="inline-flex items-center whitespace-nowrap rounded-xl border border-white/15 px-6 py-4 text-lg font-bold tracking-wide text-white/85">
-                  {a.name}
-                </span>
-              ) : (
-                <Image
-                  src={`/images/associations/${a.file}`}
-                  alt={a.full}
-                  width={360}
-                  height={140}
-                  className="h-full w-auto max-w-full object-contain"
-                  onError={() => setFailed((s) => ({ ...s, [a.file]: true }))}
-                />
-              )}
-            </div>
-          ))}
-        </div>
+      <div className="mt-3 flex flex-nowrap items-center gap-3 overflow-x-auto pb-1">
+        {CERTIFICATIONS.map((c) => (
+          <div
+            key={c.logo}
+            title={c.name}
+            className="flex h-12 w-12 shrink-0 items-center justify-center opacity-90 transition-all duration-200 hover:scale-110 hover:opacity-100"
+          >
+            {failed[c.logo] ? (
+              <span className="whitespace-nowrap rounded-md border border-white/15 px-2 py-1 text-[9px] font-bold tracking-wide text-white/70">
+                {c.short}
+              </span>
+            ) : (
+              <Image
+                src={c.logo}
+                alt={c.name}
+                width={48}
+                height={48}
+                className="h-full w-full object-contain"
+                onError={() => setFailed((s) => ({ ...s, [c.logo]: true }))}
+              />
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
