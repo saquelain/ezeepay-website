@@ -1,8 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 import Image from "next/image";
 import { ShieldCheck } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const BENEFITS: { number: string; image: string; title: string; desc: string; iconScale?: number }[] = [
     { number: "01", image: "/images/why-join/onboarding.png", title: "Instant & Easy Onboarding", desc: "Paperless onboarding in minutes.", iconScale: 1.35 },
@@ -29,40 +33,73 @@ const FEATURED_BENEFIT = {
 
 export default function WhyJoinEzeepay() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(false);
 
-  useEffect(() => {
-    // Respect reduced-motion preference — skip straight to visible.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setInView(true);
-      return;
-    }
+  useLayoutEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const el = sectionRef.current;
-    if (!el) return;
+    const ctx = gsap.context(() => {
+      if (reduceMotion) {
+        gsap.set(".why-join-reveal, .why-join-node-dot, .why-join-progress", {
+          clearProps: "all",
+        });
+        return;
+      }
 
-    // If the section is already on screen at mount (e.g. page loaded
-    // mid-scroll, or scroll position restored on refresh), show it
-    // immediately instead of waiting on an observer callback that may
-    // never fire because it's already "in view" with nothing to cross.
-    const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.85) {
-      setInView(true);
-      return;
-    }
+      /* ── Header ── */
+      gsap.from(".why-join-header > *", {
+        y: 24,
+        opacity: 0,
+        duration: 0.7,
+        ease: "power2.out",
+        stagger: 0.1,
+        scrollTrigger: { trigger: ".why-join-header", start: "top 85%" },
+      });
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -10% 0px" }
-    );
+      /* ── Progress line fills as the timeline scrolls through ── */
+      gsap.set(".why-join-progress", { scaleY: 0 });
+      gsap.to(".why-join-progress", {
+        scaleY: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".why-join-timeline",
+          start: "top 65%",
+          end: "bottom 55%",
+          scrub: 0.4,
+        },
+      });
 
-    observer.observe(el);
-    return () => observer.disconnect();
+      /* ── Each benefit reveals in sequence as it's scrolled to ── */
+      const items = gsap.utils.toArray<HTMLElement>(".why-join-item");
+      items.forEach((item) => {
+        const content = item.querySelector(".why-join-reveal");
+        const dot = item.querySelector(".why-join-node-dot");
+        if (!content || !dot) return;
+
+        gsap.set(content, { autoAlpha: 0, y: 26 });
+        gsap.set(dot, { scale: 0, backgroundColor: "#ffffff" });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: item,
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        });
+
+        tl.to(dot, {
+          scale: 1,
+          backgroundColor: "#5B2D8E",
+          duration: 0.35,
+          ease: "back.out(3)",
+        }).to(
+          content,
+          { autoAlpha: 1, y: 0, duration: 0.55, ease: "power2.out" },
+          "-=0.15"
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -79,120 +116,137 @@ export default function WhyJoinEzeepay() {
                    [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]"
       />
 
-      <div className="relative mx-auto max-w-[1440px]">
+      <div className="relative mx-auto max-w-[1100px]">
         {/* Header */}
-        <div className="mx-auto max-w-2xl text-center">
-          <span
-            className={`inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple shadow-sm transition-all duration-700 ease-out ${
-              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-            }`}
-          >
+        <div className="why-join-header mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple shadow-sm">
             Why Ezeepay
           </span>
-          <h2
-            className={`mt-5 text-4xl font-bold leading-tight text-brand-purple-dark transition-all delay-[80ms] duration-700 ease-out md:text-5xl ${
-              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-            }`}
-          >
+          <h2 className="mt-5 text-4xl font-bold leading-tight text-brand-purple-dark md:text-5xl">
             Why Join{" "}
             <span className="bg-gradient-to-r from-brand-orange to-brand-purple bg-clip-text text-transparent">
-                Ezeepay?
+              Ezeepay?
             </span>
-            </h2>
-          <p
-            className={`mx-auto mt-4 text-lg leading-relaxed text-brand-grey transition-all delay-[160ms] duration-700 ease-out ${
-              inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-            }`}
-          >
+          </h2>
+          <p className="mx-auto mt-4 text-lg leading-relaxed text-brand-grey">
             Empowering Bharat with technology, support & unlimited opportunities.
           </p>
         </div>
 
-        {/* Grid — 12 cards, compact, up to 6 columns on larger screens */}
-        <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6">
-        {BENEFITS.map((b, i) => (
-            <div
-                key={b.number}
-                style={{ transitionDelay: inView ? `${220 + (i % 6) * 60}ms` : "0ms" }}
-                className={`relative rounded-xl bg-white p-3.5 shadow-sm ring-1 ring-black/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg ${
-                  inView ? "translate-y-0 opacity-100" : "translate-y-7 opacity-0"
-                }`}
-            >
-                <span className="absolute left-3 top-3 rounded-md bg-brand-purple-light px-2 py-0.5 text-[10px] font-bold text-brand-purple">
-                {b.number}
-                </span>
+        {/* Scroll-sequenced benefits timeline */}
+        <div className="why-join-timeline relative mt-20">
+          {/* Static track */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-6 top-0 bottom-0 w-px bg-black/10 lg:left-1/2 lg:-translate-x-1/2"
+          />
+          {/* Animated fill that grows with scroll progress */}
+          <div
+            aria-hidden
+            className="why-join-progress pointer-events-none absolute left-6 top-0 bottom-0 w-px origin-top
+                       bg-gradient-to-b from-brand-purple via-brand-purple to-brand-orange
+                       lg:left-1/2 lg:-translate-x-1/2"
+          />
 
-                <div className="mt-6 flex flex-col items-start gap-2.5">
-                    <div className="relative h-11 w-11 flex-shrink-0 overflow-visible">
-                        <div
+          <div className="flex flex-col gap-10 lg:gap-6">
+            {BENEFITS.map((b, i) => {
+              const onRight = i % 2 === 1;
+              return (
+                <div
+                  key={b.number}
+                  className="why-join-item relative pl-16 lg:grid lg:grid-cols-2 lg:items-center lg:gap-14 lg:pl-0"
+                >
+                  {/* Node */}
+                  <span
+                    className="why-join-node-dot absolute left-6 top-1 z-10 flex h-9 w-9 -translate-x-1/2 items-center
+                               justify-center rounded-full text-[11px] font-bold text-white shadow-md ring-4 ring-white
+                               lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2"
+                  >
+                    {b.number}
+                  </span>
+
+                  {/* Content card — alternates sides on large screens */}
+                <div
+                className={`why-join-reveal mx-auto w-full max-w-[280px] rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-lg lg:max-w-[300px] ${
+                    onRight
+                    ? "lg:col-start-2 lg:ml-0 lg:mr-auto lg:text-left"
+                    : "lg:col-start-1 lg:row-start-1 lg:ml-auto lg:mr-0 lg:text-right"
+                }`}
+                >
+                <div
+                    className={`flex min-h-[160px] flex-col items-center gap-3 text-center ${
+                    onRight ? "lg:items-start lg:text-left" : "lg:items-end lg:text-right"
+                    }`}
+                >
+                    <div className="relative h-14 w-14 flex-shrink-0 overflow-visible">
+                    <div
                         className="relative h-full w-full"
                         style={{ transform: `scale(${b.iconScale || 1})` }}
-                        >
+                    >
                         <Image src={b.image} alt="" fill className="object-contain" />
-                        </div>
                     </div>
-                <div className="min-w-0">
-                <h3 className="text-sm font-bold leading-snug text-[#1D1233]">
-                    {b.title}
-                  </h3>
-                  <p className="mt-1 text-[12px] leading-snug text-brand-grey">
-                    {b.desc}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-
-          {/* Card 13 — half-width, two icons (left mark + right decorative illustration) */}
-          <div
-            style={{ transitionDelay: inView ? "560ms" : "0ms" }}
-            className={`relative col-span-full mx-auto w-full rounded-xl bg-white p-5 shadow-sm ring-1 ring-black/5 transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg sm:w-2/3 lg:w-1/2 ${
-              inView ? "translate-y-0 opacity-100" : "translate-y-7 opacity-0"
-            }`}
-          >
-            <span className="absolute left-4 top-4 rounded-md bg-brand-purple-light px-2 py-0.5 text-[10px] font-bold text-brand-purple">
-                {FEATURED_BENEFIT.number}
-            </span>
-
-            <div className="mt-1 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                <div className="relative h-20 w-20 flex-shrink-0">
-                <Image
-                    src={FEATURED_BENEFIT.image}
-                    alt=""
-                    fill
-                    className="object-contain"
-                />
-                </div>
-                <div>
-                    <h3 className="text-base font-bold leading-snug text-brand-purple-dark">
-                    {FEATURED_BENEFIT.title}
+                    </div>
+                    <div className="min-w-0">
+                    <h3 className="text-base font-bold leading-snug text-[#1D1233]">
+                        {b.title}
                     </h3>
-                    <p className="mt-1 max-w-sm text-[13px] leading-relaxed text-brand-grey">
-                    {FEATURED_BENEFIT.desc}
+                    <p className="mt-1.5 text-sm leading-relaxed text-brand-grey">
+                        {b.desc}
                     </p>
+                    </div>
                 </div>
                 </div>
+                </div>
+              );
+            })}
 
-                <div className="relative hidden h-24 w-24 flex-shrink-0 sm:block">
-                    <Image
-                        src={FEATURED_BENEFIT.imageRight}
+            {/* Final node — featured benefit, full width */}
+            <div className="why-join-item relative pl-16 lg:pl-0">
+              <span
+                className="why-join-node-dot absolute left-6 top-1 z-10 flex h-9 w-9 -translate-x-1/2 items-center
+                           justify-center rounded-full text-[11px] font-bold text-white shadow-md ring-4 ring-white
+                           lg:left-1/2 lg:-translate-x-1/2"
+              >
+                {FEATURED_BENEFIT.number}
+              </span>
+
+              <div className="why-join-reveal mx-auto rounded-2xl bg-white p-5 shadow-sm ring-1 ring-black/5 lg:w-2/3">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="relative h-20 w-20 flex-shrink-0">
+                      <Image
+                        src={FEATURED_BENEFIT.image}
                         alt=""
                         fill
                         className="object-contain"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-base font-bold leading-snug text-brand-purple-dark">
+                        {FEATURED_BENEFIT.title}
+                      </h3>
+                      <p className="mt-1 max-w-sm text-[13px] leading-relaxed text-brand-grey">
+                        {FEATURED_BENEFIT.desc}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="relative hidden h-24 w-24 flex-shrink-0 sm:block">
+                    <Image
+                      src={FEATURED_BENEFIT.imageRight}
+                      alt=""
+                      fill
+                      className="object-contain"
                     />
+                  </div>
                 </div>
+              </div>
             </div>
-            </div>
+          </div>
         </div>
 
         {/* Bottom banner */}
-        <div
-          style={{ transitionDelay: inView ? "640ms" : "0ms" }}
-          className={`mx-auto mt-8 flex w-fit max-w-full flex-col items-center gap-2 rounded-full bg-brand-purple px-6 py-4 text-center shadow-lg shadow-brand-purple/25 transition-all duration-500 ease-out sm:flex-row sm:gap-3 sm:text-left ${
-            inView ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0"
-          }`}
-        >
+        <div className="why-join-banner mx-auto mt-12 flex w-fit max-w-full flex-col items-center gap-2 rounded-full bg-brand-purple px-6 py-4 text-center shadow-lg shadow-brand-purple/25 sm:flex-row sm:gap-3 sm:text-left">
           <ShieldCheck size={20} className="flex-shrink-0 text-white" />
           <p className="text-sm text-white/90 sm:text-base">
             <span className="font-bold text-white">
