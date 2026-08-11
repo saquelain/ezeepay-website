@@ -120,7 +120,7 @@ export default function Hero() {
       ref={sectionRef}
       id="hero"
       className="relative flex h-[100svh] flex-col overflow-hidden rounded-b-[2.5rem]
-                 bg-gradient-to-b from-[#EDE7F8] via-[#E3D9F5] to-[#D9CCF2]"
+                 bg-gradient-to-b from-white via-white to-[#F7F7F8]"
     >
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col px-6 pt-14 text-center">
         {/* Headline */}

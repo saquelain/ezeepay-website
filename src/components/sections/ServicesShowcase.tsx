@@ -129,14 +129,14 @@ export default function ServicesShowcase() {
       {/* Soft ambient wash */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-24 mx-auto h-[500px] max-w-5xl rounded-full bg-brand-purple-light blur-[130px] opacity-50"
+        className="pointer-events-none absolute inset-x-0 top-24 mx-auto h-[500px] max-w-5xl rounded-full bg-gray-100 blur-[130px] opacity-50"
       />
 
       <div className="relative mx-auto max-w-7xl">
         {/* ── Header ── */}
         <div className="mx-auto max-w-2xl text-center">
           <span
-            className={`inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-brand-purple-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple transition-all duration-700 ease-out ${
+            className={`inline-flex items-center gap-2 rounded-full border border-border-subtle bg-gray-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple transition-all duration-700 ease-out ${
               inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
             }`}
           >

@@ -36,7 +36,7 @@ export default function Navbar() {
     <>
       <header
         onMouseLeave={() => setOpenMenu(null)}
-        className={`fixed top-0 inset-x-0 z-50 bg-[#EDE7F8] shadow-[0_1px_12px_rgba(59,30,102,0.08)]
+        className={`fixed top-0 inset-x-0 z-50 bg-white shadow-[0_1px_12px_rgba(0,0,0,0.06)]
                     transition-transform duration-300 ease-in-out
                     ${hidden && !mobileOpen ? "-translate-y-full" : "translate-y-0"}`}
       >

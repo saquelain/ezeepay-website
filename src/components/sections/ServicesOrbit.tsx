@@ -115,10 +115,10 @@ export default function ServicesOrbit() {
   const resume = () => { hoverCount.current = Math.max(0, hoverCount.current - 1); };
 
   return (
-    <section className="relative mx-4 my-8 overflow-hidden rounded-[2.5rem] bg-gradient-to-b from-white to-[#F3EEFA] pt-24">
+    <section className="relative mx-4 my-8 overflow-hidden rounded-[2.5rem] bg-gradient-to-b from-white to-[#FAFAFA] pt-24">
       {/* ── Header ── */}
       <div className="relative z-30 mx-auto max-w-2xl px-6 text-center">
-        <span className="inline-flex items-center rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-brand-purple-dark shadow-sm ring-1 ring-brand-purple/10">
+        <span className="inline-flex items-center rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-brand-purple-dark shadow-sm ring-1 ring-border-subtle">
           Our Services
         </span>
         <h2 className="mt-5 text-4xl font-bold leading-tight text-brand-purple-dark md:text-5xl">

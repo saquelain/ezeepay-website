@@ -24,7 +24,7 @@ function FeaturedCard({
 }) {
   return (
     <Link href={item.href} onClick={onLinkClick} className="group/card block">
-      <div className="relative mb-4 aspect-[16/10] overflow-hidden rounded-xl bg-brand-purple-light">
+      <div className="relative mb-4 aspect-[16/10] overflow-hidden rounded-xl bg-gray-100">
         <Image
           src={item.image}
           alt={item.title}
@@ -52,14 +52,14 @@ export default function ResourcesMegaMenu({
   return (
     <div
       className="absolute inset-x-0 top-full overflow-hidden rounded-b-2xl border-t border-black/5
-                 bg-white shadow-[0_24px_48px_-12px_rgba(59,30,102,0.18)]"
+                 bg-white shadow-[0_24px_48px_-12px_rgba(0,0,0,0.12)]"
     >
       {/* Background decoration */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-brand-purple/10 blur-3xl" />
+        <div className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gray-100 blur-3xl" />
         <div
           className="absolute inset-y-0 left-0 w-1/4 opacity-30
-                     [background-image:radial-gradient(circle,#5B2D8E_1px,transparent_1px)]
+                     [background-image:radial-gradient(circle,#9CA3AF_1px,transparent_1px)]
                      [background-size:22px_22px]
                      [mask-image:linear-gradient(to_right,black,transparent)]"
         />

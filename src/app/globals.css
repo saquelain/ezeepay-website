@@ -11,6 +11,7 @@
   --color-brand-purple-light: #F3EEFA;
   --color-brand-orange: #F47B20;
   --color-brand-grey: #6B7280;
+  --color-border-subtle: #E5E7EB;
 }
 
 @theme inline {

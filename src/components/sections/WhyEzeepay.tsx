@@ -260,13 +260,13 @@ export default function WhyEzeepay() {
       {/* Soft ambient wash behind the grid */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-32 -z-0 mx-auto h-[480px] max-w-5xl rounded-full bg-brand-purple-light blur-[120px] opacity-60"
+        className="pointer-events-none absolute inset-x-0 top-32 -z-0 mx-auto h-[480px] max-w-5xl rounded-full bg-gray-100 blur-[120px] opacity-60"
       />
 
       <div className="relative mx-auto max-w-6xl">
         {/* ── Header ── */}
         <div className="mx-auto max-w-2xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-brand-purple-light px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border-subtle bg-gray-50 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-orange" />
             Why Ezeepay
           </span>
@@ -304,7 +304,7 @@ export default function WhyEzeepay() {
           {/* A — Fully Secure & Compliant */}
           <div
             onMouseMove={handleSpotlight}
-            className="secure-card bento-card card-glow group flex flex-col rounded-3xl bg-gradient-to-b from-[#F3EEFA] to-white p-6 ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-xl hover:shadow-brand-purple/10"
+            className="secure-card bento-card card-glow group flex flex-col rounded-3xl bg-gradient-to-b from-[#FAFAFA] to-white p-6 ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-xl hover:shadow-brand-purple/10"
           >
             <h3 className="text-center text-xl font-bold text-brand-purple-dark">
               Fully Secure &amp; Compliant
@@ -332,7 +332,7 @@ export default function WhyEzeepay() {
               {TRUST_BADGES.map(({ icon: Icon, label }) => (
                 <span
                   key={label}
-                  className="trust-badge inline-flex items-center gap-1.5 rounded-full border border-brand-purple/10 bg-white px-3 py-1.5 text-[11px] font-semibold text-brand-purple-dark shadow-sm"
+                  className="trust-badge inline-flex items-center gap-1.5 rounded-full border border-border-subtle bg-white px-3 py-1.5 text-[11px] font-semibold text-brand-purple-dark shadow-sm"
                 >
                   <Icon size={13} className="text-brand-orange" />
                   {label}
@@ -363,7 +363,7 @@ export default function WhyEzeepay() {
           {/* B — Community */}
           <div
             onMouseMove={handleSpotlight}
-            className="bento-card card-glow rounded-3xl bg-gradient-to-b from-white to-[#F3EEFA] p-6 ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-xl hover:shadow-brand-purple/10"
+            className="bento-card card-glow rounded-3xl bg-gradient-to-b from-white to-[#FAFAFA] p-6 ring-1 ring-black/5 transition-shadow duration-300 hover:shadow-xl hover:shadow-brand-purple/10"
           >
             <h3 className="text-center text-xl font-bold text-brand-purple-dark">
               <span className="count-up" data-target="1000000">0</span>+ Agents
@@ -374,7 +374,7 @@ export default function WhyEzeepay() {
               {/* Slow dashed orbit */}
               <div
                 aria-hidden
-                className="orbit-ring absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-brand-purple/25"
+                className="orbit-ring absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border border-dashed border-border-subtle"
               />
 
               {FLOAT_POSITIONS.map(([top, left, size], i) => (
@@ -474,7 +474,7 @@ export default function WhyEzeepay() {
           {/* D — Wide showcase (tall) */}
           <div
             onMouseMove={handleSpotlight}
-            className="showcase-card bento-card card-glow relative flex flex-col overflow-hidden rounded-3xl bg-gradient-to-b from-[#EDE7F8] to-[#D9CCF2] p-6 ring-1 ring-black/5 md:col-span-2 md:row-span-2"
+            className="showcase-card bento-card card-glow relative flex flex-col overflow-hidden rounded-3xl bg-gradient-to-b from-[#FAFAFA] to-[#F0F0F1] p-6 ring-1 ring-black/5 md:col-span-2 md:row-span-2"
           >
             {/* Header */}
             <div className="relative z-20 flex items-center justify-center gap-3">

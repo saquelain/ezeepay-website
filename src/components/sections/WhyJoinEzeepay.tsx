@@ -68,13 +68,13 @@ export default function WhyJoinEzeepay() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-gradient-to-b from-white to-[#F3EEFA] px-4 py-24 sm:px-6 lg:px-10"
+      className="relative overflow-hidden bg-gradient-to-b from-white to-[#FAFAFA] px-4 py-24 sm:px-6 lg:px-10"
     >
       {/* Dotted grid — top-left, pure CSS */}
       <div
         aria-hidden
         className="pointer-events-none absolute left-0 top-0 h-64 w-64 opacity-40
-                   [background-image:radial-gradient(circle,#5B2D8E_1.5px,transparent_1.5px)]
+                   [background-image:radial-gradient(circle,#9CA3AF_1.5px,transparent_1.5px)]
                    [background-size:20px_20px]
                    [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]"
       />
@@ -83,7 +83,7 @@ export default function WhyJoinEzeepay() {
         {/* Header */}
         <div className="mx-auto max-w-2xl text-center">
           <span
-            className={`inline-flex items-center gap-2 rounded-full border border-brand-purple/15 bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple shadow-sm transition-all duration-700 ease-out ${
+            className={`inline-flex items-center gap-2 rounded-full border border-border-subtle bg-white px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand-purple shadow-sm transition-all duration-700 ease-out ${
               inView ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
             }`}
           >

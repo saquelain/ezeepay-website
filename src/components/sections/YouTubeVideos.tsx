@@ -145,7 +145,7 @@ export default function YouTubeVideos() {
                     className="group block h-full rounded-3xl bg-white p-2.5 shadow-lg shadow-brand-purple/5 ring-1 ring-black/5 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-brand-purple/10"
                   >
                     {/* Thumbnail */}
-                    <div className="relative aspect-video overflow-hidden rounded-2xl bg-brand-purple-light">
+                    <div className="relative aspect-video overflow-hidden rounded-2xl bg-gray-100">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={`https://i.ytimg.com/vi/${v.id}/hqdefault.jpg`}
