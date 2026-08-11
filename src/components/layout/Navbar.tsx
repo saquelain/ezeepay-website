@@ -1,7 +1,6 @@
 // Navbar.tsx
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -12,6 +11,7 @@ import ResourcesMegaMenu from "@/components/layout/ResourcesMegaMenu";
 import MobileMenu from "@/components/layout/MobileMenu";
 import { useScrollDirection } from "@/hooks/useScrollDirection";
 import { useClickSound } from "@/hooks/useClickSound";
+import FoundationLogo from "@/components/svg/FoundationLogo";
 
 const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.EzeePay_DigitalBharat&pli=1";
@@ -42,15 +42,9 @@ export default function Navbar() {
       >
         <nav className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
           {/* Logo */}
-          <Link href="/" aria-label="Ezeepay home">
-            <Image
-              src="/ezeepay-logo.png"
-              alt="Ezeepay — A brand of MJ Digital"
-              width={180}
-              height={44}
-              priority
-            />
-          </Link>
+          <Link href="/" aria-label="Ezeepay home" className="flex h-full items-center shrink-0">
+  <FoundationLogo animated={false} className="h-3/4 w-auto max-h-14" />
+</Link>
 
           {/* Links (desktop) */}
           <ul className="hidden items-center gap-8 lg:flex">
