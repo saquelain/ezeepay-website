@@ -85,14 +85,28 @@ export default function WhyEzeepay() {
   const [centerIdx, setCenterIdx] = useState(0);
   const [alertIdx, setAlertIdx] = useState(0);
 
+  const [isVisible, setIsVisible] = useState(false);
+
   useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
     const a = setInterval(() => setCenterIdx((i) => (i + 1) % COMMUNITY.length), 2000);
     const b = setInterval(() => setAlertIdx((i) => (i + 1) % ALERTS.length), 2600);
     return () => {
       clearInterval(a);
       clearInterval(b);
     };
-  }, []);
+  }, [isVisible]);
 
   useLayoutEffect(() => {
     const mm = gsap.matchMedia();
