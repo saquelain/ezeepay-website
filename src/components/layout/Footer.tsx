@@ -56,9 +56,9 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.4fr]">
           {/* Left block */}
           <div>
-            <Link href="/" aria-label="Ezeepay home" className="inline-block rounded-xl bg-white p-3">
-              <Image src="/ezeepay-logo.png" alt="Ezeepay — A brand of MJ Digital" width={160} height={40} />
-            </Link>
+          <Link href="/" aria-label="Ezeepay home" className="inline-block rounded-xl bg-white p-3">
+            <Image src="/mj-digital-logo.webp" alt="Ezeepay — A brand of MJ Digital" width={160} height={40} />
+          </Link>
             <p className="mt-5 max-w-xs text-lg leading-relaxed text-white/70">
               Making Digital Banking Ezee For Every Village In{" "}
               <span className="font-semibold text-[#C4B5FD]">भारत</span>
