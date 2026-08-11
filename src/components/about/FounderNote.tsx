@@ -45,31 +45,45 @@ export default function FounderNote() {
             </div>
           </div>
 
-          {/* ── Header row ── */}
-          <div className="flex items-start justify-between gap-6">
-            <div>
-              <h3 className="text-2xl font-bold text-brand-purple-dark">
-                Our Journey
-              </h3>
-              <p className="mt-1 text-brand-grey">A note from the founder</p>
+          {/* ── Avatar, pinned to the card's right side (not the narrower text column) ── */}
+          <div className="absolute right-10 top-24 hidden flex-shrink-0 rounded-2xl border-2 border-dashed border-border-subtle p-3 md:top-28 md:block lg:right-14">
+            <div className="relative h-44 w-44 overflow-hidden rounded-xl bg-gray-100 lg:h-52 lg:w-52">
+              <Image
+                src="/images/about/founder.webp"
+                alt="Shams Tabrez, founder of Ezeepay"
+                fill
+                sizes="208px"
+                className="object-cover"
+              />
             </div>
+          </div>
 
-            {/* Avatar in a dashed "photo corner" frame */}
-            <div className="mt-6 flex-shrink-0 rounded-2xl border-2 border-dashed border-border-subtle p-3 md:mt-10 md:p-3.5">
-              <div className="relative h-36 w-36 overflow-hidden rounded-xl bg-gray-100 md:h-52 md:w-52">
+          {/* ── "Our Journey" heading, sitting directly above the letter ── */}
+          <div>
+            <h3 className="text-3xl font-bold text-brand-purple-dark">
+              Our Journey
+            </h3>
+            <p className="mt-2 text-lg text-brand-grey">A note from the founder</p>
+          </div>
+
+          {/* ── Letter body — reserves space on the right (md+) so text doesn't
+                 run under the absolutely-positioned avatar. Sized up (text-lg,
+                 leading-loose, larger paragraph gaps) so the block fills the
+                 card's height instead of reading as a thin strip of text. ── */}
+          <div className="relative z-10 mt-8 max-w-2xl space-y-7 pr-0 text-lg leading-loose text-brand-grey md:max-w-none md:pr-64 lg:pr-72 lg:text-xl">
+            {/* Mobile-only avatar, back inline since there's no room to pin it aside */}
+            <div className="float-right ml-6 mb-4 flex-shrink-0 rounded-2xl border-2 border-dashed border-border-subtle p-2.5 md:hidden">
+              <div className="relative h-32 w-32 overflow-hidden rounded-xl bg-gray-100">
                 <Image
                   src="/images/about/founder.webp"
                   alt="Shams Tabrez, founder of Ezeepay"
                   fill
-                  sizes="208px"
+                  sizes="128px"
                   className="object-cover"
                 />
               </div>
             </div>
-          </div>
 
-          {/* ── Letter body ── */}
-          <div className="relative z-10 mt-10 max-w-2xl space-y-6 leading-relaxed text-brand-grey">
             <p>Dear partners,</p>
 
             <p>
@@ -86,7 +100,7 @@ export default function FounderNote() {
               leading players in the Indian market.
             </p>
 
-            <p>
+            <p className="clear-right">
               As a rural fintech company, EzeePay Digital Bharat has aimed to
               make banking easier and more convenient in rural areas of India.
               Following that, we&apos;ve expanded our retail base and channel
@@ -95,10 +109,10 @@ export default function FounderNote() {
             </p>
 
             <div className="pt-4">
-              <p className="text-lg font-bold text-brand-purple-dark">
+              <p className="text-xl font-bold text-brand-purple-dark">
                 Shams Tabrez
               </p>
-              <p className="text-brand-grey">Founder, Ezeepay</p>
+              <p className="text-lg text-brand-grey">Founder, Ezeepay</p>
             </div>
           </div>
 
