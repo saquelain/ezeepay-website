@@ -35,11 +35,11 @@ const SOCIAL_ICONS: Record<string, React.ReactNode> = {
 function LinkColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">{title}</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500">{title}</h3>
       <ul className="mt-5 space-y-3">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-[15px] text-white/75 transition-colors hover:text-white">
+            <Link href={l.href} className="text-[15px] text-neutral-600 transition-colors hover:text-neutral-950">
               {l.label}
             </Link>
           </li>
@@ -51,26 +51,26 @@ function LinkColumn({ title, links }: { title: string; links: { label: string; h
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-[#120B22] text-white">
+    <footer className="relative overflow-hidden bg-[#F4F3F8] text-neutral-900">
       <div className="mx-auto max-w-7xl px-6 pt-20">
         <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1.4fr]">
           {/* Left block */}
           <div>
-          <Link href="/" aria-label="Ezeepay home" className="inline-block rounded-xl bg-white p-3">
+          <Link href="/" aria-label="Ezeepay home" className="inline-block rounded-xl border border-black/5 bg-white p-3 shadow-sm">
             <Image src="/mj-digital-logo.webp" alt="Ezeepay — A brand of MJ Digital" width={160} height={40} />
           </Link>
-            <p className="mt-5 max-w-xs text-lg leading-relaxed text-white/70">
+            <p className="mt-5 max-w-xs text-lg leading-relaxed text-neutral-600">
               Making Digital Banking Ezee For Every Village In{" "}
-              <span className="font-semibold text-[#C4B5FD]">भारत</span>
+              <span className="font-semibold text-[#6D28D9]">भारत</span>
             </p>
 
             {/* CTA — Lodge a Complaint only */}
             <div className="mt-8 inline-flex flex-col items-stretch gap-3">
             <Link
                 href="/lodge-complaint"
-                className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full border border-white/20 px-8 py-4 text-[16px] font-medium leading-none text-white/85 transition-all duration-300 hover:border-white/40 hover:bg-white/5"
+                className="inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full border border-black/15 px-8 py-4 text-[16px] font-medium leading-none text-neutral-700 transition-all duration-300 hover:border-black/30 hover:bg-black/5"
             >
-                <ShieldCheck size={17} className="text-[#C4B5FD]" />
+                <ShieldCheck size={17} className="text-[#6D28D9]" />
                 Lodge a Complaint
             </Link>
             </div>
@@ -83,8 +83,8 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15
-                            text-white/70 transition-all hover:border-white/40 hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-black/10
+                            text-neutral-600 transition-all hover:border-black/30 hover:text-neutral-950"
                 >
                 {SOCIAL_ICONS[s.label]}
                 </a>
@@ -99,39 +99,43 @@ export default function Footer() {
 
           {/* Contact column */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-white/50">Contact</h3>
-            <ul className="mt-5 space-y-4 text-sm leading-relaxed text-white/70">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-neutral-500">Contact</h3>
+            <ul className="mt-5 space-y-4 text-sm leading-relaxed text-neutral-600">
               {OFFICES.map((o) => (
                 <li key={o.name}>
-                  <p className="font-semibold text-white/90">{o.name}</p>
+                  <p className="font-semibold text-neutral-900">{o.name}</p>
                   <p className="mt-0.5">{o.address}</p>
                 </li>
               ))}
               <li className="flex items-center gap-2 pt-1">
-                <Phone size={15} className="text-[#C4B5FD]" />
-                <a href="tel:+919205621622" className="hover:text-white">
+                <Phone size={15} className="text-[#6D28D9]" />
+                <a href="tel:+919205621622" className="hover:text-neutral-950">
                   12x7 Help Desk: +91 9205621622
                 </a>
               </li>
               <li className="flex items-center gap-2">
-                <Mail size={15} className="text-[#C4B5FD]" />
-                <a href="mailto:info@ezeepay.app" className="hover:text-white">
+                <Mail size={15} className="text-[#6D28D9]" />
+                <a href="mailto:info@ezeepay.app" className="hover:text-neutral-950">
                   info@ezeepay.app
                 </a>
               </li>
             </ul>
           </div>
+
+          {/* Certifications & Associations — spans the width under Services/Company/Join Us,
+              using the empty space left below those short columns. Auto-placed onto its own
+              row since it comes after all 5 first-row items and needs 4 tracks to fit. */}
+          <div className="lg:col-span-4">
+            <FooterAssociations />
+          </div>
         </div>
 
-        {/* Certifications & Associations */}
-        <FooterAssociations />
-
         {/* Bottom bar */}
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-6 text-sm text-white/50 md:flex-row">
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-black/10 py-6 text-sm text-neutral-500">
           <p>© {new Date().getFullYear()} MJ Digital Services Pvt Ltd. All rights reserved.</p>
           <div className="flex flex-wrap gap-6">
             {FOOTER_LINKS.legal.map((l) => (
-              <Link key={l.href} href={l.href} className="transition-colors hover:text-white">
+              <Link key={l.href} href={l.href} className="transition-colors hover:text-neutral-950">
                 {l.label}
               </Link>
             ))}
@@ -141,7 +145,7 @@ export default function Footer() {
 
       {/* Giant watermark */}
       <div aria-hidden="true" className="pointer-events-none -mt-[9vw] select-none overflow-hidden">
-        <p className="translate-y-[22%] bg-gradient-to-b from-white/10 to-transparent bg-clip-text
+        <p className="translate-y-[22%] bg-gradient-to-b from-neutral-900/80 to-neutral-900/10 bg-clip-text
                       text-center text-[18vw] font-black leading-none tracking-tight text-transparent">
           ezeepay
         </p>
