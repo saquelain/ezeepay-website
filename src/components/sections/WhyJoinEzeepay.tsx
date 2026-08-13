@@ -174,7 +174,7 @@ export default function WhyJoinEzeepay() {
                 }`}
                 >
                 <div
-                    className={`flex min-h-[160px] flex-col items-center gap-3 text-center ${
+                    className={`flex min-h-[60px] flex-col items-center gap-3 text-center ${
                     onRight ? "lg:items-start lg:text-left" : "lg:items-end lg:text-right"
                     }`}
                 >
