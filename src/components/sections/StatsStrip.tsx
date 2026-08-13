@@ -11,7 +11,7 @@ const STATS = [
   { value: 15000, suffix: "+", label: "Pincode Served" },
   { value: 2490, suffix: "+", label: "Super Distributors" },
   { value: 8382, suffix: "+", label: "Distributors" },
-  { value: 400000, suffix: "+", label: "Merchant Outlets" },
+  { value: 1000000, suffix: "+", label: "Merchant Outlets" },
 ];
 
 function formatIndian(n: number) {
