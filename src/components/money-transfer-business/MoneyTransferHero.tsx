@@ -14,7 +14,7 @@ const HIGHLIGHTS = [
 export default function MoneyTransferHero() {
   return (
     <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#EDE7F8] via-[#F3EEFA] to-white">
-      <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+      {/* <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
         <div className="absolute right-0 top-0 h-[55%] w-[45%] md:h-[65%] md:w-[38%]">
           <Image
             src="/images/services/banking-service/corner-blob.png"
@@ -37,7 +37,7 @@ export default function MoneyTransferHero() {
             className="object-cover object-right-top"
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="relative z-10 mx-auto w-full max-w-[96rem] px-6 pb-16 pt-28 lg:px-12 lg:pt-32">
         <Link
