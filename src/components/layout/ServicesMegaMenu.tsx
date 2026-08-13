@@ -51,7 +51,7 @@ const CATEGORY_HREF: Record<string, string> = {
   utility: "/utility-bill-payment",
   insurance: "/insurance",
   travel: "/travel-services",
-  "e-governance": "/egovernment-Services",
+  "e-governance": "/egovernment-services",
   "account-opening": "/neo-banking",
 };
 
