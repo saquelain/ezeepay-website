@@ -29,7 +29,7 @@ export default function EgovServicesHero() {
               E-Governance Services
             </p>
 
-            <h1 className="mt-4 text-5xl font-extrabold leading-[1.1] tracking-tight text-brand-purple-dark md:text-6xl xl:text-[4.5rem]">
+            <h1 className="mt-4 text-4xl font-extrabold leading-[1.1] tracking-tight text-brand-purple-dark md:text-5xl xl:text-6xl">
               Government Services,
               <br />
               From Your{" "}

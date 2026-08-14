@@ -35,11 +35,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
       <Preloader />
-      <SmoothScroll>
+      <SmoothScroll />
+      {/* <SmoothScroll /> */}
         <Navbar />
         <main className="flex-1 pt-20">{children}</main>
         <Footer />
-      </SmoothScroll>
+      {/* </SmoothScroll> */}
       </body>
     </html>
   );
