@@ -1,5 +1,6 @@
 import InsuranceHero from "@/components/insurance/InsuranceHero";
 import InsuranceList from "@/components/insurance/InsuranceList";
+import Resources from "@/components/sections/Resources";
 
 export const metadata = {
   title: "Insurance Services | Ezeepay",
@@ -12,6 +13,7 @@ export default function InsurancePage() {
     <>
       <InsuranceHero />
       <InsuranceList />
+      <Resources />
     </>
   );
 }
