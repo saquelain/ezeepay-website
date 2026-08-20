@@ -1,5 +1,5 @@
 import BlogCard from "./BlogCard";
-import type { BlogPost } from "@/lib/dummy-data/blog-posts";
+import type { BlogPost } from "@/lib/types/blog";
 
 export default function BlogGrid({ posts }: { posts: BlogPost[] }) {
   if (posts.length === 0) {

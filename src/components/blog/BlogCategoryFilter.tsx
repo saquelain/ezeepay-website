@@ -1,15 +1,8 @@
 "use client";
 
-import { useState } from "react";
-
-export const BLOG_CATEGORIES = [
-  { label: "All", slug: "all" },
-  { label: "Banking & AePS", slug: "banking-aeps" },
-  { label: "UPI & Payments", slug: "upi-payments" },
-  { label: "Insurance", slug: "insurance" },
-  { label: "Travel Services", slug: "travel-services" },
-  { label: "Government Schemes", slug: "government-schemes" },
-];
+import { useEffect, useState } from "react";
+import { getCategories } from "@/lib/api/blog";
+import type { Category } from "@/lib/types/blog";
 
 export default function BlogCategoryFilter({
   active,
@@ -18,9 +11,17 @@ export default function BlogCategoryFilter({
   active: string;
   onChange: (slug: string) => void;
 }) {
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    getCategories().then(setCategories).catch(console.error);
+  }, []);
+
+  const pills = [{ label: "All", slug: "all" }, ...categories.map((c) => ({ label: c.name, slug: c.slug }))];
+
   return (
     <div className="flex gap-3 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-      {BLOG_CATEGORIES.map((cat) => {
+      {pills.map((cat) => {
         const isActive = active === cat.slug;
         return (
           <button

@@ -11,7 +11,7 @@ import {
   Smartphone,
   type LucideIcon,
 } from "lucide-react";
-import type { BlogPost } from "@/lib/dummy-data/blog-posts";
+import type { BlogPost } from "@/lib/types/blog";
 
 const CATEGORY_ICONS: Record<string, LucideIcon> = {
   "banking-aeps": Fingerprint,
@@ -76,7 +76,7 @@ function getHeroScale(title: string, excerpt: string) {
 
 export default function BlogDetailHero({ post }: { post: BlogPost }) {
   const scale = getHeroScale(post.title, post.excerpt);
-  const CategoryIcon = CATEGORY_ICONS[post.category] ?? Fingerprint;
+  const CategoryIcon = CATEGORY_ICONS[post.category?.slug] ?? Fingerprint;
 
   return (
     <section className="relative w-full overflow-hidden border-b border-brand-purple/15 bg-gradient-to-b from-[#EDE7F8] via-[#F3EEFA] to-white">
@@ -98,12 +98,12 @@ export default function BlogDetailHero({ post }: { post: BlogPost }) {
           {/* Left — copy */}
 <div className="flex flex-col justify-between py-2">
   <div>
-    <span
-      className={`inline-flex w-fit items-center rounded-full bg-brand-purple-light font-semibold text-brand-purple ${scale.badge}`}
-    >
-      <CategoryIcon size={scale.badgeIcon} />
-      {post.categoryLabel}
-    </span>
+  <span
+              className={`inline-flex w-fit items-center rounded-full bg-brand-purple-light font-semibold text-brand-purple ${scale.badge}`}
+            >
+              <CategoryIcon size={scale.badgeIcon} />
+              {post.category?.name}
+            </span>
 
     <h1
       className={`${scale.spacingTop} font-extrabold leading-[1.1] tracking-tight text-brand-purple-dark ${scale.heading}`}
@@ -122,23 +122,25 @@ export default function BlogDetailHero({ post }: { post: BlogPost }) {
   <div
     className={`flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-brand-grey`}
   >
-              <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2">
                 <span className="relative h-7 w-7 overflow-hidden rounded-full bg-brand-purple-light">
-                  <Image
-                    src={post.author.avatar}
-                    alt={post.author.name}
-                    fill
-                    className="object-cover"
-                  />
+                  {post.author?.avatar && (
+                    <Image
+                      src={post.author.avatar}
+                      alt={post.author.name}
+                      fill
+                      className="object-cover"
+                    />
+                  )}
                 </span>
                 <span className="font-medium text-brand-purple-dark">
-                  By {post.author.name}
+                  By {post.author?.name || "Ezeepay Team"}
                 </span>
               </div>
 
               <span className="flex items-center gap-1.5">
                 <Calendar size={14} />
-                {formatDate(post.date)}
+                {formatDate(post.publishedAt)}
               </span>
 
               <span className="flex items-center gap-1.5">
@@ -153,17 +155,19 @@ export default function BlogDetailHero({ post }: { post: BlogPost }) {
             </div>
           </div>
 
-          {/* Right — hero image */}
-            <div className="relative mx-auto flex aspect-[4/3] w-full max-w-lg items-center justify-center overflow-hidden rounded-2xl bg-transparent lg:max-w-none">
-            <Image
-                src={post.image}
+                    {/* Right — hero image */}
+                    <div className="relative mx-auto flex aspect-[4/3] w-full max-w-lg items-center justify-center overflow-hidden rounded-2xl bg-white/40 lg:max-w-none">
+            {post.coverImage && (
+              <Image
+                src={post.coverImage}
                 alt={post.title}
                 fill
                 priority
                 sizes="(min-width: 1024px) 45vw, 90vw"
                 className="object-contain p-4"
-            />
-            </div>
+              />
+            )}
+          </div>
         </div>
       </div>
     </section>
