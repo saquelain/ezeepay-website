@@ -144,10 +144,12 @@ export default function BlogDetailHero({ post }: { post: BlogPost }) {
                 {formatDate(post.publishedAt)}
               </span>
 
-              <span className="flex items-center gap-1.5">
-                <Clock size={14} />
-                {post.readTimeMinutes} min read
-              </span>
+              {post.readTime && (
+                <span className="flex items-center gap-1.5">
+                  <Clock size={14} />
+                  {post.readTime}
+                </span>
+              )}
 
               <span className="flex items-center gap-1.5">
                 <Eye size={14} />
