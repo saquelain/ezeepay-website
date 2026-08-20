@@ -21,13 +21,14 @@ const CATEGORY_ICONS: Record<string, LucideIcon> = {
   "government-schemes": Landmark,
 };
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("en-IN", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
-}
+function formatDate(dateStr: string | null) {
+    if (!dateStr) return "—";
+    return new Date(dateStr).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  }
 
 function formatViews(views: number) {
   if (views >= 1000) return `${(views / 1000).toFixed(1)}K views`;
