@@ -54,7 +54,7 @@ function LinkColumn({ title, links }: { title: string; links: { label: string; h
 
 export default function Footer() {
   return (
-    <footer className="dot-grid relative overflow-hidden bg-[#18181B] text-white">
+    <footer className="dot-grid relative overflow-hidden bg-brand-purple-dark text-white">
       {/* Top hairline glow */}
       <div
         aria-hidden
